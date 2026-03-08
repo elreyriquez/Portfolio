@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Downloaded/uncategorized images (you've sorted into category folders)
+assets/graphic-design/downloaded/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
