@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI/UX | Shaquille Comrie</title>
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('portfolio-theme') !== 'light' ? 'dark' : 'light'
+    );
+  </script>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    .site-header { padding: 1.125rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+    .page-uiux .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      border-bottom: none;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+    }
+    .page-uiux .site-header .nav-links a,
+    .page-uiux .site-header .nav-actions button {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .page-uiux .site-header .nav-links a:hover,
+    .page-uiux .site-header .nav-actions button:hover { color: var(--accent); }
+    .page-uiux .site-header .nav-actions button { border-color: rgba(255, 255, 255, 0.3); }
+    .page-uiux .site-header .site-logo img { filter: invert(1); }
+    .site-logo { flex: 1; flex-shrink: 0; }
+    .site-logo a { display: block; line-height: 0; }
+    .site-logo img { height: 68px; width: auto; display: block; }
+    [data-theme="dark"] .site-logo img { filter: invert(1); }
+    .nav-links { flex: 1; display: flex; justify-content: center; align-items: center; gap: 6rem; flex-wrap: nowrap; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-current { color: var(--accent); font-weight: 500; }
+    .nav-actions { flex: 1; flex-shrink: 0; display: flex; justify-content: flex-end; }
+    .nav-actions button { padding: 0.26rem 0.56rem; border: 1px solid var(--border-hover); background: transparent; color: var(--text-muted); font-family: inherit; font-size: 0.675rem; cursor: pointer; border-radius: 2px; }
+    .nav-actions button:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .theme-icon-sun { display: none; }
+    .theme-toggle .theme-icon-moon { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-moon { display: none; }
+    .theme-toggle svg { width: 0.94rem; height: 0.94rem; }
+
+    .intro-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--intro-bg);
+      color: var(--intro-text);
+      overflow: hidden;
+    }
+    .intro-section .intro-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .intro-section .intro-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+    }
+    .intro-section .section-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .intro-section .intro {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="page-uiux">
+  <header class="site-header">
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <nav class="nav-links">
+      <a href="graphic-design.html">Graphic Design</a>
+      <a href="video-production.html">Video Production</a>
+      <a href="ui-ux.html" class="nav-current">UI/UX</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to day mode">
+        <span class="theme-icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg></span>
+        <span class="theme-icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+      </button>
+    </div>
+  </header>
+  <main>
+    <section class="intro-section" id="intro">
+      <video class="intro-bg-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="assets/landing/0_Ai_generated_Airplane_1920x1080.mp4" type="video/mp4">
+      </video>
+      <div class="intro-bg-overlay"></div>
+      <div class="section-inner">
+        <p class="intro">Coming Soon</p>
+      </div>
+    </section>
+  </main>
+  <script src="js/theme.js"></script>
+  <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
+</body>
+</html>

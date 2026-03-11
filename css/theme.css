@@ -1,0 +1,35 @@
+/* Day mode (default) */
+:root {
+  --intro-bg: #000;
+  --intro-text: #fff;
+  --bg: #f8f6f2;
+  --surface: #fff;
+  --text: #1a1a1a;
+  --text-muted: #555;
+  --accent: #c4952e;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  --skill-row-bg: #b91c1c;
+  --skill-row-text: #fff;
+  --skill-row-border: rgba(255, 255, 255, 0.15);
+  --skill-hover-bg: #000;
+  --skill-hover-text: #fff;
+}
+
+/* Night mode */
+[data-theme="dark"] {
+  --intro-bg: #fff;
+  --intro-text: #000;
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --text: #f5f5f5;
+  --text-muted: #888;
+  --accent: #e8c547;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --skill-row-bg: #b91c1c;
+  --skill-row-text: #fff;
+  --skill-row-border: rgba(255, 255, 255, 0.15);
+  --skill-hover-bg: #000;
+  --skill-hover-text: #fff;
+}

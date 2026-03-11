@@ -1,12 +1,24 @@
 # macOS
 .DS_Store
-
-# Downloaded/uncategorized images (you've sorted into category folders)
-assets/graphic-design/downloaded/
+.AppleDouble
+.LSOverride
+*.swp
+*~
 
 # Editor / IDE
-.idea/
 .vscode/
-*.swp
-*.swo
-*~
+.idea/
+*.sublime-project
+*.sublime-workspace
+.cursor/
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs & cache
+*.log
+npm-debug.log*
+.cache/

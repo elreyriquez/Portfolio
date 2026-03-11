@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Production | Shaquille Comrie</title>
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('portfolio-theme') !== 'light' ? 'dark' : 'light'
+    );
+  </script>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    .site-header { padding: 1.125rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+    .site-logo { flex: 1; flex-shrink: 0; }
+    .site-logo a { display: block; line-height: 0; }
+    .site-logo img { height: 68px; width: auto; display: block; }
+    [data-theme="dark"] .site-logo img { filter: invert(1); }
+    .nav-links { flex: 1; display: flex; justify-content: center; align-items: center; gap: 6rem; flex-wrap: nowrap; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-current { color: var(--accent); font-weight: 500; }
+    .nav-actions { flex: 1; flex-shrink: 0; display: flex; justify-content: flex-end; }
+    .nav-actions button { padding: 0.26rem 0.56rem; border: 1px solid var(--border-hover); background: transparent; color: var(--text-muted); font-family: inherit; font-size: 0.675rem; cursor: pointer; border-radius: 2px; }
+    .nav-actions button:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .theme-icon-sun { display: none; }
+    .theme-toggle .theme-icon-moon { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-moon { display: none; }
+    .theme-toggle svg { width: 0.94rem; height: 0.94rem; }
+
+    .vp-section {
+      padding: 4rem 2rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    .vp-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+    }
+    .vp-video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #111;
+      border-radius: 4px;
+    }
+    .vp-video-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .vp-video-thumb {
+      display: block;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #111;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .vp-video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .vp-video-thumb .vp-video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .vp-video-thumb:hover .vp-video-play-overlay { opacity: 1; }
+    .vp-video-thumb .vp-video-play-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 6px;
+    }
+    .vp-project {
+      margin-bottom: 4rem;
+    }
+    .vp-project:last-child { margin-bottom: 0; }
+    .vp-project h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .vp-project p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 1.5rem;
+    }
+    .vp-placeholder {
+      aspect-ratio: 16/9;
+      background: rgba(0,0,0,0.1);
+      border: 2px dashed var(--border-hover);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    [data-theme="dark"] .vp-placeholder { background: rgba(255,255,255,0.05); }
+
+    .vp-social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .vp-social-cell {
+      aspect-ratio: 9/16;
+      background: #111;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .vp-social-cell a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .vp-social-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .vp-social-cell .vp-social-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .vp-social-cell .vp-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .vp-social-cell a:hover .vp-play-overlay { opacity: 1; }
+    .vp-social-cell .vp-play-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 4px;
+    }
+    @media (max-width: 640px) {
+      .vp-social-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .vp-hd-carousel-wrap {
+      position: relative;
+      margin: 0 -2rem;
+      padding: 0 3rem;
+    }
+    .vp-hd-carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 0.5rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .vp-hd-carousel::-webkit-scrollbar { height: 8px; }
+    .vp-hd-carousel::-webkit-scrollbar-track { background: var(--border); border-radius: 4px; }
+    .vp-hd-carousel::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
+    .vp-hd-slide {
+      flex: 0 0 min(320px, 85vw);
+      scroll-snap-align: start;
+    }
+    .vp-hd-slide a {
+      display: block;
+      aspect-ratio: 16/9;
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .vp-hd-slide a:hover { border-color: var(--accent); }
+    .vp-hd-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .vp-hd-slide .vp-hd-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .vp-hd-slide a:hover .vp-hd-play-overlay { opacity: 1; }
+    .vp-hd-slide .vp-hd-play-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 4px;
+    }
+    .vp-hd-carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .vp-hd-carousel-nav:hover { background: rgba(0,0,0,0.7); }
+    .vp-hd-carousel-nav.prev { left: 0.5rem; }
+    .vp-hd-carousel-nav.next { right: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <nav class="nav-links">
+      <a href="graphic-design.html">Graphic Design</a>
+      <a href="video-production.html" class="nav-current">Video Production</a>
+      <a href="ui-ux.html">UI/UX</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to night mode">
+        <span class="theme-icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg></span>
+        <span class="theme-icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="vp-section">
+      <h2>Social Reels</h2>
+      <div class="vp-social-grid">
+        <!-- 3 columns × 6 rows = 18 vertical video slots (9:16). To add a video: replace inner div with: -->
+        <!-- <a href="https://youtube.com/watch?v=VIDEO_ID" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg" alt=""><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a> -->
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/kWIljP8i-Ls" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/kWIljP8i-Ls/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/kWIljP8i-Ls/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/kWIljP8i-Ls/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/iJjfUSOU_mQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/iJjfUSOU_mQ/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/iJjfUSOU_mQ/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/iJjfUSOU_mQ/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/16jP1HJPVHc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/16jP1HJPVHc/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/16jP1HJPVHc/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/16jP1HJPVHc/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/2AJE8zSGGZg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/2AJE8zSGGZg/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/2AJE8zSGGZg/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/2AJE8zSGGZg/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/ON9SUDn7wDY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/ON9SUDn7wDY/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/ON9SUDn7wDY/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/ON9SUDn7wDY/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/a3sheoHgmk4" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/a3sheoHgmk4/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/a3sheoHgmk4/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/a3sheoHgmk4/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/7_pAhJxdh7s" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/7_pAhJxdh7s/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/7_pAhJxdh7s/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/7_pAhJxdh7s/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/i6qzt61D-uY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/i6qzt61D-uY/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/i6qzt61D-uY/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/i6qzt61D-uY/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/vq0qkTqUUQg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/vq0qkTqUUQg/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/vq0qkTqUUQg/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/vq0qkTqUUQg/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/7flXrjvlovY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/7flXrjvlovY/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/7flXrjvlovY/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/7flXrjvlovY/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/u0ctRq6xVU8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/u0ctRq6xVU8/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/u0ctRq6xVU8/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/u0ctRq6xVU8/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/7CSmmM3Yu68" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/7CSmmM3Yu68/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/7CSmmM3Yu68/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/7CSmmM3Yu68/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/olL3pd4HXlo" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/olL3pd4HXlo/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/olL3pd4HXlo/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/olL3pd4HXlo/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/s327SphD1qs" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/s327SphD1qs/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/s327SphD1qs/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/s327SphD1qs/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/TSXSnsP0ltk" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/TSXSnsP0ltk/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/TSXSnsP0ltk/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/TSXSnsP0ltk/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/huhG61y7dZI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/huhG61y7dZI/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/huhG61y7dZI/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/huhG61y7dZI/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/Pz12cSC_55Y" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Pz12cSC_55Y/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/Pz12cSC_55Y/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/Pz12cSC_55Y/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+        <div class="vp-social-cell"><a href="https://youtube.com/shorts/70YBAYUUzjw" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/70YBAYUUzjw/maxresdefault.jpg" alt="" onerror="this.src='https://img.youtube.com/vi/70YBAYUUzjw/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/70YBAYUUzjw/hqdefault.jpg'}"><span class="vp-play-overlay"><span class="vp-play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span></a></div>
+      </div>
+    </section>
+
+    <section class="vp-section">
+      <h2>HD Videos</h2>
+      <div class="vp-hd-carousel-wrap">
+        <button type="button" class="vp-hd-carousel-nav prev" id="hdCarouselPrev" aria-label="Previous">‹</button>
+        <div class="vp-hd-carousel" id="hdCarousel">
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=OboReRP2LeA" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/OboReRP2LeA/maxresdefault.jpg" alt="HD Video 1" onerror="this.src='https://img.youtube.com/vi/OboReRP2LeA/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=8fH6GzhM3Ic" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/8fH6GzhM3Ic/maxresdefault.jpg" alt="HD Video 2" onerror="this.src='https://img.youtube.com/vi/8fH6GzhM3Ic/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=i2abZ7EEfWA" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/i2abZ7EEfWA/maxresdefault.jpg" alt="HD Video 3" onerror="this.src='https://img.youtube.com/vi/i2abZ7EEfWA/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=FIHxysvCIhs" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/FIHxysvCIhs/maxresdefault.jpg" alt="HD Video 4" onerror="this.src='https://img.youtube.com/vi/FIHxysvCIhs/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=oE8qCz-xjsc" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/oE8qCz-xjsc/maxresdefault.jpg" alt="HD Video 5" onerror="this.src='https://img.youtube.com/vi/oE8qCz-xjsc/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=fuwSqI1_oek" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/fuwSqI1_oek/maxresdefault.jpg" alt="HD Video 6" onerror="this.src='https://img.youtube.com/vi/fuwSqI1_oek/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <div class="vp-hd-slide">
+            <a href="https://www.youtube.com/watch?v=mdV3i-0va9I" target="_blank" rel="noopener">
+              <img src="https://img.youtube.com/vi/mdV3i-0va9I/maxresdefault.jpg" alt="HD Video 7" onerror="this.src='https://img.youtube.com/vi/mdV3i-0va9I/hqdefault.jpg'">
+              <span class="vp-hd-play-overlay"><span class="vp-hd-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </a>
+          </div>
+          <!-- Add more slides: copy the vp-hd-slide block and replace VIDEO_ID in href and img src -->
+        </div>
+        <button type="button" class="vp-hd-carousel-nav next" id="hdCarouselNext" aria-label="Next">›</button>
+      </div>
+    </section>
+
+    <section class="vp-section">
+      <h2>My First Release</h2>
+      <div class="vp-project">
+        <a href="https://www.youtube.com/watch?v=v9ZnEwS883A" target="_blank" rel="noopener" class="vp-video-thumb" style="margin-bottom: 1.5rem;">
+          <img src="https://img.youtube.com/vi/v9ZnEwS883A/maxresdefault.jpg" alt="My First Release" onerror="this.src='https://img.youtube.com/vi/v9ZnEwS883A/hqdefault.jpg'">
+          <span class="vp-video-play-overlay"><span class="vp-video-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </a>
+        <p>This project took my team a month to complete. Most of the time was spent gathering footage. We collaborated with young talented individuals in Kingston of various fields and disciplines. It was fun spending time with my fellow youth observing what it takes for them to pursue their passions. The aim of this project is to inspire the viewer to become active. To go out and live their days to the fullest. To live without fear while pursuing their dreams.</p>
+      </div>
+    </section>
+
+    <section class="vp-section">
+      <h2>Music Video</h2>
+      <div class="vp-project">
+        <a href="https://www.youtube.com/watch?v=uhQ9ZufsWOs" target="_blank" rel="noopener" class="vp-video-thumb" style="margin-bottom: 1.5rem;">
+          <img src="https://img.youtube.com/vi/uhQ9ZufsWOs/maxresdefault.jpg" alt="Music Video" onerror="this.src='https://img.youtube.com/vi/uhQ9ZufsWOs/hqdefault.jpg'">
+          <span class="vp-video-play-overlay"><span class="vp-video-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </a>
+        <p>It was an honor to work with Italian rap star Vacca. He was very knowledgeable about production and helped me to become more confident in my skills as a videographer by sharing tips from his experience in the music industry. He also introduced me to his videographer and editor Mattea from Italy for coaching throughout the shoot. Overall it was a rich experience and I am happy with how it all worked out.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
+  <script>
+    (function() {
+      var carousel = document.getElementById('hdCarousel');
+      var prev = document.getElementById('hdCarouselPrev');
+      var next = document.getElementById('hdCarouselNext');
+      var slideWidth = 320 + 16;
+      prev.addEventListener('click', function() {
+        carousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+      });
+      next.addEventListener('click', function() {
+        carousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

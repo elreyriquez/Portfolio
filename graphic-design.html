@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphic Design | Shaquille Comrie</title>
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('portfolio-theme') !== 'light' ? 'dark' : 'light'
+    );
+  </script>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .site-header {
+      padding: 1.125rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-logo { flex: 1; flex-shrink: 0; }
+    .site-logo a { display: block; line-height: 0; }
+    .site-logo img { height: 68px; width: auto; display: block; }
+    [data-theme="dark"] .site-logo img { filter: invert(1); }
+
+    .nav-links {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6rem;
+      flex-wrap: nowrap;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-current { color: var(--accent); font-weight: 500; }
+
+    .nav-actions { flex: 1; flex-shrink: 0; display: flex; justify-content: flex-end; }
+    .nav-actions button {
+      padding: 0.26rem 0.56rem;
+      border: 1px solid var(--border-hover);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.675rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .nav-actions button:hover { border-color: var(--accent); color: var(--accent); }
+
+    .theme-toggle .theme-icon-sun {
+      display: none;
+    }
+
+    .theme-toggle .theme-icon-moon {
+      display: block;
+    }
+
+    [data-theme="dark"] .theme-toggle .theme-icon-sun {
+      display: block;
+    }
+
+    [data-theme="dark"] .theme-toggle .theme-icon-moon {
+      display: none;
+    }
+
+    .theme-toggle svg {
+      width: 0.94rem;
+      height: 0.94rem;
+    }
+
+    .filter-bar {
+      padding: 3rem 2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-hover);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .gallery {
+      padding: 0 2rem 4rem;
+      columns: 320px;
+      column-gap: 1.5rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      overflow: hidden;
+      background: var(--surface);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .site-header, .filter-bar, .gallery {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .filter-bar {
+        padding-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <nav class="nav-links">
+      <a href="graphic-design.html" class="nav-current">Graphic Design</a>
+      <a href="video-production.html">Video Production</a>
+      <a href="ui-ux.html">UI/UX</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to night mode">
+        <span class="theme-icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg></span>
+        <span class="theme-icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="Corporate">Corporate</button>
+    <button class="filter-btn" data-category="Food">Food</button>
+    <button class="filter-btn" data-category="Illustrations">Illustrations</button>
+    <button class="filter-btn" data-category="Events">Events</button>
+    <button class="filter-btn" data-category="Logos">Logos</button>
+    <button class="filter-btn" data-category="Motion">Motion</button>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/Engineer-Day.jpg" alt="Engineer Day" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/General-Ad.jpg" alt="General Ad" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/We%27re-Hiring.jpg" alt="We're Hiring" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/Website-and-Apps.jpg" alt="Website and Apps" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/design-10-15338d_20f83192a3164d7d9e0f8b7384bef735~mv2_d_10800_21600_s_4.png" alt="Corporate design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Corporate">
+      <img src="assets/graphic-design/Corporate/image-79959170-489d-41e7-9b2a-7249f615607e.png" alt="Corporate design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Food">
+      <img src="assets/graphic-design/Food/Bay-Juices-New-Year.jpg" alt="Bay Juices New Year" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Food">
+      <img src="assets/graphic-design/Food/Island%20Sol%20Product%20Duo%20Cofee%20and%20Chocolate.jpg" alt="Island Sol Product Duo" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Food">
+      <img src="assets/graphic-design/Food/Social-Media---Orange.jpg" alt="Social Media Orange" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Food">
+      <img src="assets/graphic-design/Food/Social-Media-Emancipation-Park.jpg" alt="Social Media Emancipation Park" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/AngelsvsDemons-01.jpg" alt="Angels vs Demons" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/Collette2orange-01.jpg" alt="Collette" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/Flashing%20Lights-01.jpg" alt="Flashing Lights" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/design-15-15338d_a011a2cbae1440d2a669e14ed3537681~mv2.jpg" alt="Illustration" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/design-21-15338d_c0bac4b180f64896ad7cafc56165627e~mv2.jpg" alt="Illustration" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Illustrations">
+      <img src="assets/graphic-design/Illustrations/leb2-01.jpg" alt="LEB" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Events">
+      <img src="assets/graphic-design/Events/C1.jpg" alt="Event design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Events">
+      <img src="assets/graphic-design/Events/c2.jpg" alt="Event design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Events">
+      <img src="assets/graphic-design/Events/C3.jpg" alt="Event design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Events">
+      <img src="assets/graphic-design/Events/Weekly-Calendar-IG-Post.jpg" alt="Weekly Calendar IG Post" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Events">
+      <img src="assets/graphic-design/Events/design-17-15338d_a96f621b32c245e78c4840a4c34381c4~mv2.jpg" alt="Event design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Logos">
+      <img src="assets/graphic-design/Logos/Metallic%20SEC%20Logo.png" alt="Metallic SEC Logo" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Logos">
+      <img src="assets/graphic-design/Logos/design-10-15338d_6ee6e780b5fd46b99592c9b70c98709a~mv2_d_4000_2500_s_4_2.jpg" alt="Logo design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Logos">
+      <img src="assets/graphic-design/Logos/design-11-15338d_743e643de36146a0b2f5522d2b9d8480~mv2.jpg" alt="Logo design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Logos">
+      <img src="assets/graphic-design/Logos/design-25-15338d_f48ae0fc0c114d7682b912304f03ec8d~mv2.jpg" alt="Logo design" loading="lazy">
+    </div>
+    <div class="gallery-item" data-category="Motion">
+      <video src="assets/graphic-design/Motion/Fire%20Wednesday.mp4" muted loop playsinline loading="lazy"></video>
+    </div>
+    <div class="gallery-item" data-category="Motion">
+      <video src="assets/graphic-design/Motion/Izizzi%20Heroes%20Day.mp4" muted loop playsinline loading="lazy"></video>
+    </div>
+    <div class="gallery-item" data-category="Motion">
+      <video src="assets/graphic-design/Motion/Red%20Stripe%20Booth.mp4" muted loop playsinline loading="lazy"></video>
+    </div>
+    <div class="gallery-item" data-category="Motion">
+      <video src="assets/graphic-design/Motion/file.mp4" muted loop playsinline loading="lazy"></video>
+    </div>
+    <div class="gallery-item" data-category="Motion">
+      <video src="assets/graphic-design/Motion/puncheon.mp4" muted loop playsinline loading="lazy"></video>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img src="" alt="" id="lightboxImg">
+    <video id="lightboxVideo" muted loop playsinline controls style="display:none;max-width:100%;max-height:90vh;"></video>
+  </div>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.category;
+        galleryItems.forEach(item => {
+          item.classList.toggle('hidden', cat !== 'all' && item.dataset.category !== cat);
+        });
+      });
+    });
+
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    galleryItems.forEach(item => {
+      const img = item.querySelector('img');
+      const video = item.querySelector('video');
+      if (img) {
+        item.addEventListener('dblclick', () => {
+          lightboxImg.style.display = 'block';
+          lightboxVideo.style.display = 'none';
+          lightboxVideo.pause();
+          lightboxVideo.removeAttribute('src');
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.add('open');
+        });
+      } else if (video) {
+        item.addEventListener('dblclick', () => {
+          lightboxImg.style.display = 'none';
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.src = video.src;
+          lightboxVideo.play();
+          lightbox.classList.add('open');
+        });
+      }
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('open');
+      lightboxVideo.pause();
+      lightboxVideo.removeAttribute('src');
+    });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('open');
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute('src');
+      }
+    });
+    document.querySelectorAll('.gallery-item video').forEach(v => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { entry.target[entry.isIntersecting ? 'play' : 'pause'](); });
+      }, { threshold: 0.25 });
+      obs.observe(v);
+    });
+  </script>
+  <script src="js/theme.js"></script>
+  <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
+</body>
+</html>
