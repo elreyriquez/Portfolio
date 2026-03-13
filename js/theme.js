@@ -30,7 +30,7 @@
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
       hamburger.addEventListener('click', () => {
-        document.body.classList.toggle('nav-open');
+        const isOpen = document.body.classList.toggle('nav-open');
         hamburger.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
         hamburger.setAttribute('aria-label', hamburger.classList.contains('active') ? 'Close menu' : 'Open menu');

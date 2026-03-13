@@ -26,8 +26,16 @@
       right: 0;
       z-index: 60;
       border-bottom: none;
+      background: transparent;
+    }
+    .page-uiux .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px);
+      z-index: -1;
+      pointer-events: none;
     }
     .page-uiux .site-header .nav-links a,
     .page-uiux .site-header .nav-actions button {
