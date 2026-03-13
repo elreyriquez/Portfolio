@@ -10,15 +10,19 @@
     right: 0;
     bottom: 0;
     background: var(--bg);
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
-    z-index: 55;
+    z-index: 100;
+    pointer-events: none;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
-  .nav-open .nav-links {
+  body.nav-open .nav-links {
+    pointer-events: auto;
     opacity: 1;
     visibility: visible;
   }
@@ -37,7 +41,8 @@
     border: 1px solid var(--border-hover);
     border-radius: 4px;
     cursor: pointer;
-    z-index: 65;
+    position: relative;
+    z-index: 101;
     transition: border-color 0.2s;
   }
   .hamburger:hover {
