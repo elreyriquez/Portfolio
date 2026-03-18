@@ -61,10 +61,7 @@
       border-bottom: 1px solid var(--border);
     }
     .page-home .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      position: relative;
       z-index: 60;
       border-bottom: none;
       background: transparent;
@@ -215,6 +212,72 @@
     .creative-strategist { margin-bottom: 2.5rem; text-align: left; }
     .creative-strategist h3 { font-family: inherit; font-size: 1.35rem; font-weight: 600; margin-bottom: 0.75rem; }
     .creative-strategist p { color: var(--text-muted); line-height: 1.6; margin: 0; font-size: 1.05rem; }
+    .design-approach { margin-top: 8rem; margin-bottom: 5rem; text-align: left; }
+    .design-approach-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      margin: 0 0 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.5em;
+      transition: transform 0.35s ease;
+    }
+    .design-approach-title:hover {
+      transform: scale(1.08);
+    }
+    .design-approach-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      max-width: 56rem;
+      margin: 2rem auto 0;
+    }
+    .approach-card {
+      position: relative;
+      padding: 1.5rem 1.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      min-height: 5rem;
+    }
+    .approach-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    [data-theme="dark"] .approach-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .approach-card--lead { grid-column: 1 / -1; padding: 2rem 2.25rem; border-left: 4px solid var(--accent); min-height: 4rem; }
+    .approach-card--lead .approach-desc { font-size: 1.1rem; }
+    .approach-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .approach-desc {
+      margin: 0;
+      padding: 0;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+    @media (max-width: 640px) {
+      .design-approach-grid { grid-template-columns: 1fr; }
+      .approach-card--lead { padding: 1.5rem 1.75rem; }
+      .approach-card--lead .approach-desc { padding: 1.5rem 1.75rem; }
+    }
     .skill-cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -427,7 +490,7 @@
       </video>
       <div class="intro-bg-overlay"></div>
       <div class="section-inner">
-        <p class="intro">I am a multi-disciplined creative producer who is dedicated to creating beautiful and exciting content, concepts, and experiences with the use of research driven, strategic design techniques.</p>
+        <p class="intro">Visual Designer focused on performance, systems, and scalable digital experiences.</p>
       </div>
     </section>
 
@@ -436,7 +499,7 @@
         <h2>My Skill Set</h2>
         <div class="creative-strategist">
           <h3>Creative Strategist</h3>
-          <p>Digital Media Specialist with 9 years of experience in production and brand management. I am prepared to improve the efficiency and finesse of any business operation I am a part of through effective creative strategy and execution.</p>
+          <p>I design across brand, motion, and product, creating visuals that are not only visually strong, but built to perform and scale. My work combines design thinking, fast iteration, and structured systems to help teams move quickly while maintaining consistency.</p>
         </div>
       </div>
       <div class="skill-cards">
@@ -464,6 +527,33 @@
           <p>IBM certified prompt specialist exploring AI tools and techniques to enhance creativity and streamline workflows.</p>
           <span class="skill-card-btn">Coming Soon →</span>
         </a>
+      </div>
+      <div class="section-inner">
+        <div class="design-approach">
+          <h3 class="design-approach-title">Design Approach</h3>
+          <div class="design-approach-grid">
+            <article class="approach-card approach-card--lead">
+              <span class="approach-label">Performance & clarity</span>
+              <p class="approach-desc">I design with both performance and clarity in mind, ensuring visuals communicate quickly and effectively.</p>
+            </article>
+            <article class="approach-card">
+              <span class="approach-label">Systems</span>
+              <p class="approach-desc">I build systems and reusable components to maintain consistency across fast-moving teams.</p>
+            </article>
+            <article class="approach-card">
+              <span class="approach-label">Brand & experience</span>
+              <p class="approach-desc">I consider both brand identity and user experience when creating visual solutions.</p>
+            </article>
+            <article class="approach-card">
+              <span class="approach-label">Iteration</span>
+              <p class="approach-desc">I iterate quickly, using feedback and data to refine and improve outcomes.</p>
+            </article>
+            <article class="approach-card">
+              <span class="approach-label">Motion & interaction</span>
+              <p class="approach-desc">I integrate motion and interaction thinking to enhance engagement and usability.</p>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
