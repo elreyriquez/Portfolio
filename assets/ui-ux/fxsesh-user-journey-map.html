@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FX Sesh User Journey Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg2: #172554;
+      --panel: rgba(17, 24, 39, 0.92);
+      --panel-border: rgba(148, 163, 184, 0.2);
+      --card: #f8fafc;
+      --card-text: #111827;
+      --muted: #cbd5e1;
+      --accent: #7c9cf5;
+      --accent2: #8b5cf6;
+      --label: #d6b66f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.18), transparent 30%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      color: white;
+    }
+    .frame {
+      width: 1600px;
+      padding: 42px 44px 36px;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    h1 span { color: var(--accent); }
+    .sub {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .board {
+      margin-top: 32px;
+      padding: 18px 16px 18px 0;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(15, 23, 42, 0.28);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 150px repeat(10, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+    .label-col-top {
+      height: 132px;
+      border-radius: 18px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .stage-head {
+      min-height: 132px;
+      padding: 10px 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      gap: 8px;
+    }
+    .stage-num {
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .stage-title {
+      font-size: 15px;
+      line-height: 1.25;
+      min-height: 40px;
+    }
+    .stage-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: rgba(248, 250, 252, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+    }
+    .row-label {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: 16px;
+      border: 1px solid rgba(214, 182, 111, 0.35);
+      color: var(--label);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      background: rgba(15, 23, 42, 0.55);
+      min-height: 118px;
+      padding: 12px;
+    }
+    .cell {
+      min-height: 118px;
+      background: var(--card);
+      color: var(--card-text);
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 8px 18px rgba(2, 6, 23, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px 12px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+    .footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>USER JOURNEY MAP: <span>FX SESH</span> MOBILE TRADING UTILITY</h1>
+    <div class="sub">Visualizing the seamless user experience across forex market sessions</div>
+
+    <div class="board">
+      <div class="grid">
+        <div class="label-col-top"></div>
+
+        <div class="stage-head"><div class="stage-num">01</div><div class="stage-title">Discover App</div><div class="stage-icon">🔎</div></div>
+        <div class="stage-head"><div class="stage-num">02</div><div class="stage-title">Open App</div><div class="stage-icon">📱</div></div>
+        <div class="stage-head"><div class="stage-num">03</div><div class="stage-title">Check Sessions</div><div class="stage-icon">🕒</div></div>
+        <div class="stage-head"><div class="stage-num">04</div><div class="stage-title">Choose Clock View</div><div class="stage-icon">🌓</div></div>
+        <div class="stage-head"><div class="stage-num">05</div><div class="stage-title">Review Open/Closed Sessions</div><div class="stage-icon">🔔</div></div>
+        <div class="stage-head"><div class="stage-num">06</div><div class="stage-title">Read News</div><div class="stage-icon">📰</div></div>
+        <div class="stage-head"><div class="stage-num">07</div><div class="stage-title">Decide Next Action</div><div class="stage-icon">💡</div></div>
+        <div class="stage-head"><div class="stage-num">08</div><div class="stage-title">Use Journal</div><div class="stage-icon">📝</div></div>
+        <div class="stage-head"><div class="stage-num">09</div><div class="stage-title">Adjust Settings</div><div class="stage-icon">⚙️</div></div>
+        <div class="stage-head"><div class="stage-num">10</div><div class="stage-title">Return via Widget/Notifications</div><div class="stage-icon">🔔</div></div>
+
+        <div class="row-label">Pain Point</div>
+        <div class="cell">Too many generic trading apps</div>
+        <div class="cell">Complex onboarding flow</div>
+        <div class="cell">Hard to calculate overlapping periods</div>
+        <div class="cell">Multiple time formats can be confusing</div>
+        <div class="cell">Manual process to review previous session logs</div>
+        <div class="cell">Too much noise in news feeds</div>
+        <div class="cell">Deciding optimal trade timing and risk</div>
+        <div class="cell">Manual data entry is time-consuming</div>
+        <div class="cell">Some settings are deeply nested or unclear</div>
+        <div class="cell">Irrelevant or overly frequent notifications</div>
+
+        <div class="row-label">Goal</div>
+        <div class="cell">Find reliable session tracker</div>
+        <div class="cell">Initiate tracking quickly</div>
+        <div class="cell">See active markets instantly</div>
+        <div class="cell">Customize preferred display</div>
+        <div class="cell">Monitor session history clearly</div>
+        <div class="cell">Access relevant market info</div>
+        <div class="cell">Make informed trading decisions</div>
+        <div class="cell">Log trades and notes efficiently</div>
+        <div class="cell">Customize experience and alerts</div>
+        <div class="cell">Re-engage with timely updates</div>
+
+        <div class="row-label">Action</div>
+        <div class="cell">Search forex trading utility, read reviews</div>
+        <div class="cell">Launch app and complete initial setup</div>
+        <div class="cell">Observe main dashboard and identify overlaps</div>
+        <div class="cell">Toggle between digital, analog, and timezone views</div>
+        <div class="cell">Review open and closed sessions with timestamps</div>
+        <div class="cell">Read filtered forex news and analysis</div>
+        <div class="cell">Use session and news data to plan next move</div>
+        <div class="cell">Enter trade details, performance, and notes</div>
+        <div class="cell">Set notifications, timezones, and display preferences</div>
+        <div class="cell">View live widget and respond to alerts</div>
+
+        <div class="row-label">Emotion</div>
+        <div class="cell">Curiosity</div>
+        <div class="cell">Curiosity</div>
+        <div class="cell">Relief</div>
+        <div class="cell">Relief</div>
+        <div class="cell">Relief</div>
+        <div class="cell">Focus</div>
+        <div class="cell">Focus</div>
+        <div class="cell">Focus</div>
+        <div class="cell">Prompt</div>
+        <div class="cell">Prompt</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>FX SESH · UX CASE STUDY</div>
+      <div>Journey map</div>
+    </div>
+  </div>
+</body>
+</html>
