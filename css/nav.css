@@ -84,3 +84,10 @@
 .page-uiux .hamburger:hover {
   border-color: var(--accent);
 }
+[data-theme="light"] .page-home .hamburger {
+  color: #1a1a1a;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .page-home .hamburger:hover {
+  border-color: var(--accent);
+}

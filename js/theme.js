@@ -9,6 +9,9 @@
     document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
     localStorage.setItem(STORAGE_KEY, theme);
     updateToggleLabel();
+    document.querySelectorAll('.intro-bg-video').forEach(function (v) {
+      v.play().catch(function () {});
+    });
   }
 
   function updateToggleLabel() {
