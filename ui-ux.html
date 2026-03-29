@@ -65,6 +65,14 @@
       margin: 0 0 0.75rem;
       color: var(--text);
     }
+    .product-thinking-lead {
+      margin: 0 0 1rem;
+      font-size: 1.12rem;
+      line-height: 1.6;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
     .product-thinking-copy {
       margin: 0;
       color: var(--text-muted);
@@ -543,10 +551,60 @@
       gap: 1.5rem;
     }
     .ux-visual-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 1.5rem;
-      align-items: start;
+      align-items: stretch;
+    }
+    .ux-visual-card--primary {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    [data-theme="dark"] .ux-visual-card--primary {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+    }
+    .ux-visual-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: -0.25rem 0 0.75rem;
+    }
+    .system-layers {
+      margin: 0 0 1.25rem;
+      padding: 0;
+      list-style: none;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+    .system-layers li {
+      margin-bottom: 0.65rem;
+      padding-left: 0.85rem;
+      border-left: 2px solid var(--accent);
+    }
+    .system-layers strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .modular-note {
+      margin: 1rem 0 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1px dashed var(--border-hover);
+    }
+    .ux-visual-meta {
+      margin: 0.5rem 0 1rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--text-muted);
     }
     .ux-visual-card,
     .ux-copy-card {
@@ -612,9 +670,6 @@
       .case-study-links { flex-direction: column; }
       .outcome-section { padding: 1.25rem; }
     }
-    @media (max-width: 900px) {
-      .ux-visual-grid { grid-template-columns: 1fr; }
-    }
   </style>
 </head>
 <body class="page-uiux">
@@ -641,7 +696,8 @@
     <section class="case-studies-section">
       <div class="product-thinking">
         <h3 class="product-thinking-title">Product Thinking</h3>
-        <p class="product-thinking-copy">I approach UI/UX as a balance between visual design and user behavior. My focus is on creating interfaces that feel intuitive, reduce friction, and guide users toward key actions while maintaining a strong and consistent visual identity.</p>
+        <p class="product-thinking-lead">I design systems, not just interfaces—structure, scalability, and clarity in complex digital products.</p>
+        <p class="product-thinking-copy">That means mapping flows and relationships before pixels: modules, rules, and feedback loops, then shaping UI so it stays coherent as the product grows. Visual design still matters—identity, hierarchy, and motion—but it follows the system.</p>
       </div>
 
       <h2 class="case-studies-title">Case Studies</h2>
@@ -653,7 +709,7 @@
             <div class="card-logo-wrap">
               <img src="assets/ui-ux/fxsesh-logo.png" alt="FX Sesh">
             </div>
-            <p class="card-brief">Complete Product Design involving Research, UI/UX, Backend Preparation, Advertising Experience Design, Notifications and Multi-Screen Flows.</p>
+            <p class="card-brief">End-to-end product: research, UI/UX, notifications, multi-screen flows, and a modular feature system built for real traders.</p>
           </div>
         </div>
 
@@ -676,7 +732,7 @@
           <div class="detail-panel-sep"></div>
           <p class="case-study-label">Case Study</p>
           <h2 class="case-study-title">FX Sesh</h2>
-          <p class="case-study-tagline">Your foreign exchange market clock. Session awareness at a glance. A mobile app and companion website for traders.</p>
+          <p class="case-study-tagline">A modular FX session product: information intake, alerts, journal, and news wired into one trader workflow—mobile app plus companion site.</p>
           <div class="tab-toggle" role="tablist" aria-label="UI or UX view">
             <button type="button" id="tab-ui" class="tab-btn is-active" data-tab="ui" role="tab" aria-selected="true">UI</button>
             <button type="button" id="tab-ux" class="tab-btn" data-tab="ux" role="tab" aria-selected="false">UX</button>
@@ -701,9 +757,9 @@
               </ul>
             </div>
             <div class="detail-card">
-              <h3 class="detail-card-title">Key design decisions</h3>
-              <p>The interface was structured with a clear visual hierarchy, ensuring key information is immediately visible while secondary elements remain accessible without overwhelming the user.</p>
-              <p>Spacing, typography, and color were used intentionally to guide attention and reduce cognitive load.</p>
+              <h3 class="detail-card-title">Design logic</h3>
+              <p>The app is organized as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole.</p>
+              <p>Visual hierarchy, spacing, and type do the same job at the UI layer: primary session state reads first; depth (journal, news) stays one tap away when traders want it.</p>
             </div>
             <div class="detail-card">
               <h3 class="detail-card-title">Color Palette</h3>
@@ -821,29 +877,47 @@
           </div><!-- /fxsesh UI content -->
           <div class="tab-content-panel" id="fxsesh-ux" role="tabpanel" aria-labelledby="tab-ux" aria-hidden="true">
             <div class="ux-section">
+              <article class="ux-copy-card">
+                <h3 class="ux-copy-title">System overview</h3>
+                <p>FX Sesh solves time-zone and session chaos for traders. The map is organized as <strong>context assets / user interest</strong> (sessions, news, performance context), an <strong>interface</strong> layer with <strong>Settings</strong> as the hub, and <strong>outputs &amp; use cases</strong> (what the trader sees and does next). Edge labels sit in their own row so the diagram stays legible at a glance.</p>
+                <p><strong>How to read it:</strong> session times drive session context into the dashboard and alerts; economic news routes to alerts and the news feed; trading performance context feeds the journal. The bottom band suggests how use cases loop users back into the product.</p>
+              </article>
               <div class="ux-visual-grid">
-                <article class="ux-visual-card">
-                  <h3 class="ux-visual-title">User journey map</h3>
-                  <p class="ux-visual-copy">This map reflects the real app flow: users open FX Sesh for session awareness first, then branch into reminders, journaling, news, learning, and re-entry via widget or notifications.</p>
-                  <a class="ux-visual-link" href="assets/ui-ux/fxsesh-user-journey-map.png?v=3" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh user journey map">
-                    <img src="assets/ui-ux/fxsesh-user-journey-map.png?v=3" alt="FX Sesh user journey map" loading="lazy">
+                <article class="ux-visual-card ux-visual-card--primary">
+                  <h3 class="ux-visual-title">FX Sesh system architecture</h3>
+                  <p class="ux-visual-subtitle">Context assets → Interface → Outputs</p>
+                  <p class="ux-visual-copy">The diagram matches the current story: <strong>session times</strong> feed session context into the dashboard and alerts; <strong>economic news</strong> feeds alerts and the news feed; <strong>users’ trading performance</strong> ties to the journal. <strong>Session preferences</strong> and <strong>preferred alerts</strong> sit in their own label row so they never overlap the cards. The bottom band describes outputs and return loops.</p>
+                  <ul class="system-layers">
+                    <li><strong>Context assets:</strong> sessions, news, performance interest—three inputs, three distinct paths.</li>
+                    <li><strong>Interface:</strong> Dashboard, Settings (hub), Alerts, News feed, Trader’s journal.</li>
+                    <li><strong>Outputs:</strong> outcomes aligned under each module; loops sketched in the footer band.</li>
+                  </ul>
+                  <p class="ux-visual-copy">Use this as the single reference for how modules relate; tweak copy if a feature ships, but keep labels in dedicated gutters so the graphic stays interview-ready.</p>
+                  <a class="ux-visual-link" href="assets/ui-ux/fxsesh-system-architecture.png?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh system architecture diagram full size">
+                    <img src="assets/ui-ux/fxsesh-system-architecture.png?v=1" alt="FX Sesh system architecture: context assets, interface with Settings hub, outputs and use cases, session context and feedback loops" loading="lazy">
                   </a>
+                  <p class="ux-visual-meta">Exported diagram for the case study (click to open full size).</p>
+                  <a class="ux-visual-link" href="assets/ui-ux/fxsesh-user-journey-map.png?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh journey map PNG full size">
+                    <img src="assets/ui-ux/fxsesh-user-journey-map.png?v=4" alt="FX Sesh user journey map (earlier sketch)" loading="lazy">
+                  </a>
+                  <p class="modular-note">Modular design: each major area can evolve (e.g. journal or alerts) without collapsing the rest of the system—as long as navigation and session logic stay consistent.</p>
                 </article>
                 <article class="ux-visual-card">
-                  <h3 class="ux-visual-title">Decision-making wireframe</h3>
-                  <p class="ux-visual-copy">This flow shows how the product guides users based on intent: checking sessions, enabling reminders, logging trades, reading news, or moving into learning content without forcing a single path.</p>
-                  <a class="ux-visual-link" href="assets/ui-ux/fxsesh-decision-wireframe.png" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh decision flow wireframe">
-                    <img src="assets/ui-ux/fxsesh-decision-wireframe.png" alt="FX Sesh decision-making wireframe" loading="lazy">
+                  <h3 class="ux-visual-title">Intent &amp; decision flow</h3>
+                  <p class="ux-visual-subtitle">Where logic branches</p>
+                  <p class="ux-visual-copy">This wireframe shows decision paths: if the user’s intent is session check vs. reminder setup vs. trade log vs. news, the product routes them without forcing a single highway. Same system as above—here with explicit if/then-style branching for reviewers who read flow.</p>
+                  <a class="ux-visual-link" href="assets/ui-ux/fxsesh-decision-wireframe.png" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh decision flow wireframe full size">
+                    <img src="assets/ui-ux/fxsesh-decision-wireframe.png" alt="FX Sesh decision flow: branching paths by user intent" loading="lazy">
                   </a>
                 </article>
               </div>
               <article class="ux-copy-card">
-                <h3 class="ux-copy-title">Key Experience Decisions</h3>
+                <h3 class="ux-copy-title">System &amp; experience decisions</h3>
                 <ul>
-                  <li><strong>Session at a glance:</strong> Digital and analog clock views with swipe; open/closed state and countdown to next open/close.</li>
-                  <li><strong>Controlled notifications:</strong> Per-session toggles and optional pre-alerts so users stay informed without spam.</li>
-                  <li><strong>Progressive depth:</strong> Sessions first; then Journal, News, and Learn tabs for users who want more.</li>
-                  <li><strong>Consistent experience:</strong> Same brand across the app and the FX Sesh website.</li>
+                  <li><strong>Session at a glance:</strong> Digital and analog clock views with swipe; open/closed state and countdown to next open/close—the anchor module.</li>
+                  <li><strong>Controlled notifications:</strong> Per-session toggles and optional pre-alerts; triggers tie back to session logic so alerts stay predictable, not noisy.</li>
+                  <li><strong>Progressive depth:</strong> Sessions first in the IA; journal, news, and learn are modules traders open when ready—scalable structure for future tabs.</li>
+                  <li><strong>Consistent surface:</strong> Same brand and patterns across the app and marketing site so the system feels like one product.</li>
                 </ul>
               </article>
               <article class="ux-copy-card">

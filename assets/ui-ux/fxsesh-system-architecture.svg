@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620"
+     role="img" aria-labelledby="fxTitle fxDesc">
+  <title id="fxTitle">FX Sesh — System architecture</title>
+  <desc id="fxDesc">Three-tier diagram: context assets, interface with Settings hub, outputs and use-case loops.</desc>
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#334155"/>
+    </marker>
+    <style><![CDATA[
+      .title    { font: 700 19px system-ui, sans-serif; fill: #0f172a; }
+      .sub      { font: 11.5px system-ui, sans-serif; fill: #475569; }
+      .tier     { font: 700 10.5px system-ui, sans-serif; letter-spacing:.07em; text-transform:uppercase; fill: #1e293b; }
+      .boxTitle { font: 600 11px system-ui, sans-serif; fill: #0f172a; }
+      .boxWhite { font: 600 11px system-ui, sans-serif; fill: #ffffff; }
+      .out      { font: 600 9.5px system-ui, sans-serif; fill: #0f172a; }
+      .gLabel   { font: 700 8.5px system-ui, sans-serif; letter-spacing:.12em; fill: #ffffff; }
+      .loopTxt  { font: 9px system-ui, sans-serif; fill: #e2e8f0; }
+      .box      { fill:#fff; stroke:#1e293b; stroke-width:1.5; }
+      .settings { fill:#dc2626; stroke:#991b1b; stroke-width:2; }
+      .pill     { fill:#fff; stroke:#94a3b8; stroke-width:1; }
+      .pillTxt  { font: 600 8.5px system-ui, sans-serif; fill:#1e293b; }
+      .e        { fill:none; stroke:#334155; stroke-width:1.3; marker-end:url(#arr); }
+      .en       { fill:none; stroke:#334155; stroke-width:1.3; }
+    ]]></style>
+  </defs>
+
+  <!-- header -->
+  <text x="600" y="30" class="title" text-anchor="middle">FX Sesh — System architecture</text>
+  <text x="600" y="50" class="sub"   text-anchor="middle">Context assets / user interest → Interface → Outputs &amp; use cases</text>
+
+  <!-- ── TIER 1: Context assets  y 62–172 ── -->
+  <rect x="28" y="62" width="1144" height="110" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="44" y="80" class="tier">Context assets / user interest pull</text>
+
+  <!--  Session times  cx=132 -->
+  <rect class="box" x="52"  y="88" width="160" height="62" rx="8"/>
+  <text x="132" y="124" class="boxTitle" text-anchor="middle">Session times</text>
+
+  <!--  Economic news  cx=572 -->
+  <rect class="box" x="492" y="88" width="160" height="62" rx="8"/>
+  <text x="572" y="117" class="boxTitle" text-anchor="middle">Economic</text>
+  <text x="572" y="131" class="boxTitle" text-anchor="middle">news</text>
+
+  <!--  Users trading performance  cx=948 -->
+  <rect class="box" x="758" y="88" width="380" height="62" rx="8"/>
+  <text x="948" y="124" class="boxTitle" text-anchor="middle">Users trading performance</text>
+
+  <!-- ── GUTTER 1  y 178–218 ── -->
+  <rect x="28" y="178" width="1144" height="40" fill="#1e293b"/>
+  <text x="44"  y="203" class="gLabel">SESSION CONTEXT</text>
+  <!-- dashed guide across gutter so reader sees the branch -->
+  <line x1="210" y1="198" x2="644" y2="198" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- ── TIER 2: Interface  y 224–386 ── -->
+  <!-- Extra height (162px) gives 44px above cards for the label-pill row -->
+  <rect x="28" y="224" width="1144" height="162" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="44" y="244" class="tier">Interface</text>
+
+  <!-- cards  y=280, h=72, cy=316
+       Dashboard  x=52-200   gap 108px   Settings x=308-456   gap 112px   Alerts x=568-716
+       News feed x=730-878                Trader's journal x=892-1163
+  -->
+  <rect class="box"      x="52"  y="280" width="148" height="72" rx="8"/>
+  <text x="126" y="320"  class="boxTitle" text-anchor="middle">Dashboard</text>
+
+  <rect class="settings" x="308" y="280" width="148" height="72" rx="8"/>
+  <text x="382" y="320"  class="boxWhite" text-anchor="middle">Settings</text>
+
+  <rect class="box"      x="568" y="280" width="148" height="72" rx="8"/>
+  <text x="642" y="320"  class="boxTitle" text-anchor="middle">Alerts</text>
+
+  <rect class="box"      x="730" y="280" width="148" height="72" rx="8"/>
+  <text x="804" y="320"  class="boxTitle" text-anchor="middle">News feed</text>
+
+  <rect class="box"      x="892" y="280" width="272" height="72" rx="8"/>
+  <text x="1028" y="320" class="boxTitle" text-anchor="middle">Trader's journal</text>
+
+  <!-- Label pills — sit in the gap, centred on the connector line y=316
+       Left pill:  gap x=200–308, centre x=254, pill w=96  x=206–302
+       Right pill: gap x=456–568, centre x=512, pill w=92  x=466–558
+  -->
+  <rect class="pill" x="208" y="307" width="92"  height="18" rx="4"/>
+  <text x="254"  y="320" class="pillTxt" text-anchor="middle">Session preferences</text>
+
+  <rect class="pill" x="468" y="307" width="88"  height="18" rx="4"/>
+  <text x="512"  y="320" class="pillTxt" text-anchor="middle">Preferred alerts</text>
+
+  <!-- Settings horizontal connectors ON y=316, ending at card edges -->
+  <!-- Settings → Dashboard: path goes right→left, arrowhead at Dashboard right edge x=200 -->
+  <path class="e" d="M 308 316 L 201 316"/>
+  <!-- Settings → Alerts: path goes left→right, arrowhead at Alerts left edge x=568 -->
+  <path class="e" d="M 456 316 L 567 316"/>
+
+  <!-- ── GUTTER 2  y 394–420 ── -->
+  <rect x="28" y="394" width="1144" height="26" fill="#1e293b"/>
+
+  <!-- ── TIER 3: Outputs  y 426–546 ── -->
+  <rect x="28" y="426" width="1144" height="120" rx="8" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="44"  y="446" class="tier">Outputs &amp; use cases</text>
+
+  <rect class="box" x="52"  y="456" width="148" height="76" rx="8"/>
+  <text x="126" y="476" class="out" text-anchor="middle"><tspan x="126" dy="0">User gets current time and</tspan><tspan x="126" dy="13">Forex session schedule to</tspan><tspan x="126" dy="13">make informed decisions.</tspan></text>
+
+  <rect class="box" x="568" y="456" width="148" height="76" rx="8"/>
+  <text x="642" y="476" class="out" text-anchor="middle"><tspan x="642" dy="0">Alerts user on preferred</tspan><tspan x="642" dy="13">Forex session changes</tspan><tspan x="642" dy="13">using push notifications.</tspan></text>
+
+  <rect class="box" x="730" y="456" width="148" height="76" rx="8"/>
+  <text x="804" y="500" class="out" text-anchor="middle">Read news</text>
+
+  <rect class="box" x="892" y="456" width="272" height="76" rx="8"/>
+  <text x="1028" y="483" class="out" text-anchor="middle"><tspan x="1028" dy="0">Log trades /</tspan><tspan x="1028" dy="13">review performance</tspan></text>
+
+  <!-- ── BOTTOM GUTTER  y 554–610 ── -->
+  <rect x="28" y="554" width="1144" height="56" fill="#1e293b"/>
+  <text x="600" y="576" class="loopTxt" text-anchor="middle">Use case loops as users are drawn back</text>
+  <text x="600" y="592" class="loopTxt" text-anchor="middle">to the application to aid their processes</text>
+
+  <!-- ═══════════════════════════════
+       CONNECTORS
+  ═══════════════════════════════ -->
+
+  <!-- Session times (cx=132, bottom y=150) → gutter branch point (132,198) -->
+  <!-- branch A → Dashboard top (126,280) -->
+  <path class="en" d="M 132 150 L 132 198"/>
+  <path class="e"  d="M 132 198 L 126 198 L 126 280"/>
+  <!-- branch B → Alerts top (642,280) via session context horizontal -->
+  <path class="e"  d="M 132 198 L 642 198 L 642 280"/>
+
+  <!-- Economic news (cx=572, bottom y=150) → News feed top (804,280) -->
+  <path class="e"  d="M 572 150 L 572 206 L 804 206 L 804 280"/>
+
+  <!-- Users trading performance (cx=948, bottom y=150) → Traders journal top (1028,280) -->
+  <path class="e"  d="M 948 150 L 948 214 L 1028 214 L 1028 280"/>
+
+  <!-- Interface → outputs (through gutter 2) -->
+  <path class="e" d="M 126 352 L 126 456"/>
+  <path class="e" d="M 642 352 L 642 456"/>
+  <path class="e" d="M 804 352 L 804 456"/>
+  <path class="e" d="M 1028 352 L 1028 456"/>
+
+  <!-- Feedback loops through bottom gutter -->
+  <!-- left: Dashboard output → left wall → Dashboard card -->
+  <path class="e" d="M 126 532 L 126 574 L 36 574 L 36 316 L 52 316"/>
+  <!-- right: Journal output → right wall → Users trading performance -->
+  <path class="e" d="M 1028 532 L 1028 582 L 1164 582 L 1164 120 L 1138 120"/>
+</svg>
