@@ -23,7 +23,7 @@
     .site-logo a { display: block; line-height: 0; }
     .site-logo img { height: 68px; width: auto; display: block; }
     [data-theme="dark"] .site-logo img { filter: invert(1); }
-    .nav-links { flex: 1; display: flex; justify-content: center; align-items: center; gap: 6rem; flex-wrap: nowrap; }
+    .nav-links { flex: 1; display: flex; justify-content: center; align-items: center; gap: clamp(1rem, 2vw, 3rem); flex-wrap: nowrap; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
     .nav-links a:hover { color: var(--accent); }
     .nav-links a.nav-current { color: var(--accent); font-weight: 500; }
@@ -283,6 +283,7 @@
       <a href="graphic-design.html">Graphic Design</a>
       <a href="video-production.html" class="nav-current">Video Production</a>
       <a href="ui-ux.html">UI/UX</a>
+      <a href="ai-enthusiast.html">AI Enthusiast</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-actions">

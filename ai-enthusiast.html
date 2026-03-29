@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Enthusiast | Shaquille Comrie</title>
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('portfolio-theme') !== 'light' ? 'dark' : 'light'
+    );
+  </script>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .site-header {
+      padding: 1.125rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-logo { flex: 1; flex-shrink: 0; }
+    .site-logo a { display: block; line-height: 0; }
+    .site-logo img { height: 68px; width: auto; display: block; }
+    [data-theme="dark"] .site-logo img { filter: invert(1); }
+
+    .nav-links {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(1rem, 2vw, 3rem);
+      flex-wrap: nowrap;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-current { color: var(--accent); font-weight: 500; }
+
+    .nav-actions { flex: 1; flex-shrink: 0; display: flex; justify-content: flex-end; }
+    .nav-actions button {
+      padding: 0.26rem 0.56rem;
+      border: 1px solid var(--border-hover);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.675rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .nav-actions button:hover { border-color: var(--accent); color: var(--accent); }
+
+    .theme-toggle .theme-icon-sun { display: none; }
+    .theme-toggle .theme-icon-moon { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .theme-icon-moon { display: none; }
+    .theme-toggle svg { width: 0.94rem; height: 0.94rem; }
+
+    main { max-width: 52rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 1rem;
+      color: var(--text);
+    }
+    .page-lead {
+      text-align: center;
+      max-width: 38rem;
+      margin: 0 auto 3rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 2.75rem 0 1rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    .tool-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .tool-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.35rem;
+    }
+    .tool-card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .tool-card h3 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tool-card h3 a:hover { color: var(--accent); }
+    .tool-meta {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .tool-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .workflow-wrap {
+      margin: 1.5rem 0 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1rem;
+      overflow: auto;
+    }
+    .workflow-wrap svg { display: block; width: 100%; max-width: 920px; height: auto; margin: 0 auto; }
+
+    .subgrid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 560px) {
+      .subgrid { grid-template-columns: 1fr 1fr; }
+    }
+    .subcard {
+      padding: 1rem 1.1rem;
+      border-radius: 8px;
+      border: 1px dashed var(--border-hover);
+      background: var(--bg);
+    }
+    .subcard h3 { margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--text); }
+    .subcard p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted); }
+    .subcard a { color: var(--accent); text-decoration: none; }
+    .subcard a:hover { text-decoration: underline; }
+
+    .cert-cards {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (min-width: 560px) {
+      .cert-cards { grid-template-columns: 1fr 1fr; }
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .cert-card-title {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .cert-card-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .cert-card-meta span { display: block; }
+    .cert-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-top: auto;
+      padding-top: 0.25rem;
+    }
+    .cert-card-actions a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .cert-card-actions a:hover { text-decoration: underline; }
+
+    .scripts-list {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+    .scripts-list li {
+      margin-bottom: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .scripts-list strong { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      main { padding-top: 2.5rem; }
+      .nav-links { gap: 1.25rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <nav class="nav-links">
+      <a href="graphic-design.html">Graphic Design</a>
+      <a href="video-production.html">Video Production</a>
+      <a href="ui-ux.html">UI/UX</a>
+      <a href="ai-enthusiast.html" class="nav-current">AI Enthusiast</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="nav-toggle" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to night mode">
+        <span class="theme-icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg></span>
+        <span class="theme-icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="page-title">AI Enthusiast</h1>
+    <p class="page-lead">
+      I use AI as part of a deliberate stack: coding in the editor, reasoning in the browser, models on the desktop, and automation in the background. Here is the tooling I rely on, how it fits together, and what I have shipped with it.
+    </p>
+
+    <h2>Core stack</h2>
+    <div class="tool-grid">
+      <article class="tool-card">
+        <div class="tool-meta">Primary IDE &amp; assistant</div>
+        <h3><a href="https://cursor.com" target="_blank" rel="noopener noreferrer">Cursor</a></h3>
+        <p>
+          My main vehicle for coding and day-to-day AI-assisted work inside the repo. Cursor connects to models from major providers you enable in settings (for example Anthropic, OpenAI, and others depending on plan and region)—there is no single fixed “model under the hood”; you choose what runs per task.
+        </p>
+      </article>
+      <article class="tool-card">
+        <div class="tool-meta">Research &amp; synthesis</div>
+        <h3><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT</a></h3>
+        <p>
+          General-purpose reasoning: search adjacent ideas, analyze long text, compare options, and filter signal from noise before I commit to an approach in code or design.
+        </p>
+      </article>
+      <article class="tool-card">
+        <div class="tool-meta">Visual manipulation</div>
+        <h3><a href="https://higgsfield.ai" target="_blank" rel="noopener noreferrer">Higgsfield</a></h3>
+        <p>
+          Image and visual workflows—generation and manipulation when the brief needs fast visual iteration beyond static comps.
+        </p>
+      </article>
+      <article class="tool-card">
+        <div class="tool-meta">Local open-source models</div>
+        <h3><a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a></h3>
+        <p>
+          Running LLMs locally for privacy-sensitive experiments, offline prompts, and apps that call a local API without sending data to the cloud.
+        </p>
+      </article>
+      <article class="tool-card">
+        <div class="tool-meta">Process automation</div>
+        <h3><a href="https://n8n.io" target="_blank" rel="noopener noreferrer">n8n</a></h3>
+        <p>
+          Workflow automation—chaining services, schedules, and webhooks so repetitive glue work happens without babysitting scripts.
+        </p>
+      </article>
+      <article class="tool-card">
+        <div class="tool-meta">Terminal agent</div>
+        <h3><a href="https://opencode.ai" target="_blank" rel="noopener noreferrer">OpenCode</a></h3>
+        <p>
+          The AI assistant I use from the terminal for agent-style runs (<code>opencode run "…"</code>): multi-step tasks, repo-aware edits, and automation-friendly workflows alongside the editor.
+        </p>
+      </article>
+    </div>
+
+    <h2>How it fits together</h2>
+    <p class="page-lead" style="margin-bottom: 0.5rem;">
+      Cursor and your project files sit at the center. Around that: local models (Ollama), automation (n8n), research (ChatGPT), terminal agents (OpenCode), and visual tools (Higgsfield). Experiments like Google’s newer surfaces sit beside this loop.
+    </p>
+    <div class="workflow-wrap" aria-label="Workflow diagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 320" width="920" height="320" role="img" aria-labelledby="wfTitle">
+        <title id="wfTitle">How AI tools connect in this workflow</title>
+        <defs>
+          <style>
+            .wf-t { font: 600 13px system-ui, sans-serif; fill: var(--text); }
+            .wf-s { font: 11px system-ui, sans-serif; fill: var(--text-muted); }
+            .wf-b { fill: var(--surface); stroke: var(--border-hover); stroke-width: 1.5; rx: 8; }
+            .wf-hub { fill: rgba(5, 150, 105, 0.12); stroke: #059669; stroke-width: 2; rx: 8; }
+            [data-theme="light"] .wf-hub { fill: #ecfdf5; }
+            .wf-e { fill: none; stroke: var(--text-muted); stroke-width: 1.25; opacity: 0.65; marker-end: url(#wf-m); }
+          </style>
+          <marker id="wf-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="var(--text-muted)"/></marker>
+        </defs>
+        <text x="460" y="28" text-anchor="middle" class="wf-t" font-size="15">Workflow — how the stack fits together</text>
+        <text x="460" y="48" text-anchor="middle" class="wf-s">Cursor sits on the code; local and cloud tools plug in around it.</text>
+        <rect class="wf-hub" x="360" y="72" width="200" height="56"/>
+        <text x="460" y="106" text-anchor="middle" class="wf-t">Cursor + your projects</text>
+        <rect class="wf-b" x="40" y="160" width="140" height="52"/><text x="110" y="192" text-anchor="middle" class="wf-t">OpenCode</text>
+        <text x="110" y="208" text-anchor="middle" class="wf-s">CLI tasks</text>
+        <rect class="wf-b" x="210" y="160" width="140" height="52"/><text x="280" y="192" text-anchor="middle" class="wf-t">Ollama</text>
+        <text x="280" y="208" text-anchor="middle" class="wf-s">Local LLMs</text>
+        <rect class="wf-b" x="570" y="160" width="140" height="52"/><text x="640" y="192" text-anchor="middle" class="wf-t">n8n</text>
+        <text x="640" y="208" text-anchor="middle" class="wf-s">Automation</text>
+        <rect class="wf-b" x="740" y="160" width="140" height="52"/><text x="810" y="192" text-anchor="middle" class="wf-t">ChatGPT</text>
+        <text x="810" y="208" text-anchor="middle" class="wf-s">Research</text>
+        <rect class="wf-b" x="200" y="248" width="160" height="52"/><text x="280" y="282" text-anchor="middle" class="wf-t">Higgsfield</text>
+        <text x="280" y="298" text-anchor="middle" class="wf-s">Visuals</text>
+        <rect class="wf-b" x="560" y="248" width="160" height="52"/><text x="640" y="282" text-anchor="middle" class="wf-t">Experiments</text>
+        <text x="640" y="298" text-anchor="middle" class="wf-s">Antigravity, Gemini…</text>
+        <path class="wf-e" d="M 460 128 L 460 144"/>
+        <path class="wf-e" d="M 110 160 L 110 144 L 400 144 L 400 128"/>
+        <path class="wf-e" d="M 280 160 L 280 144"/>
+        <path class="wf-e" d="M 640 160 L 640 144"/>
+        <path class="wf-e" d="M 810 160 L 810 144 L 520 144 L 520 128"/>
+        <path class="wf-e" d="M 400 200 L 280 248"/>
+        <path class="wf-e" d="M 520 200 L 640 248"/>
+      </svg>
+    </div>
+
+    <h2>Additional AI experience</h2>
+    <div class="subgrid">
+      <div class="subcard">
+        <h3><a href="https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform" target="_blank" rel="noopener noreferrer">Google Antigravity</a></h3>
+        <p>Google’s agent-first development surface—exploring how autonomous agents, editor, and browser loops compare to my usual Cursor + terminal workflow.</p>
+      </div>
+      <div class="subcard">
+        <h3><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini Canvas</a></h3>
+        <p>Long-form reasoning and canvas-style collaboration inside Gemini for drafts, structured breakdowns, and visual planning alongside other tools.</p>
+      </div>
+      <div class="subcard">
+        <h3><a href="https://stitch.withgoogle.com" target="_blank" rel="noopener noreferrer">Stitch (with Google)</a></h3>
+        <p>Google’s UI experiment tool for turning prompts into interface directions—useful for quick explorations before refining in Figma or code.</p>
+      </div>
+    </div>
+
+    <h2>Certificates</h2>
+    <p class="page-lead" style="margin-bottom: 1.25rem; font-size: 0.95rem;">
+      Generative AI programs on Coursera (IBM, SkillUp). Open each PDF to view the full certificate.
+    </p>
+    <div class="cert-cards">
+      <article class="cert-card">
+        <h3 class="cert-card-title">Generative AI for UI/UX Design (Specialization)</h3>
+        <p class="cert-card-meta">
+          <span>Coursera · three-course specialization · Dec 13, 2025</span>
+          <span>Introduction &amp; applications, prompt engineering basics, future of UX/UI design.</span>
+        </p>
+        <div class="cert-card-actions">
+          <a href="assets/ai/certificates/coursera-specialization-genai-uiux.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+        </div>
+      </article>
+      <article class="cert-card">
+        <h3 class="cert-card-title">Generative AI: Prompt Engineering Basics</h3>
+        <p class="cert-card-meta">
+          <span>IBM · Coursera · Dec 11, 2025</span>
+        </p>
+        <div class="cert-card-actions">
+          <a href="assets/ai/certificates/coursera-genai-prompt-engineering-basics.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+        </div>
+      </article>
+      <article class="cert-card">
+        <h3 class="cert-card-title">Generative AI: The Future of UX/UI Design</h3>
+        <p class="cert-card-meta">
+          <span>SkillUp · Coursera · Dec 13, 2025</span>
+        </p>
+        <div class="cert-card-actions">
+          <a href="assets/ai/certificates/coursera-genai-future-ux-ui.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+        </div>
+      </article>
+      <article class="cert-card">
+        <h3 class="cert-card-title">Generative AI: Introduction and Applications</h3>
+        <p class="cert-card-meta">
+          <span>IBM · Coursera · Dec 5, 2025</span>
+        </p>
+        <div class="cert-card-actions">
+          <a href="assets/ai/certificates/coursera-genai-intro-applications.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+        </div>
+      </article>
+    </div>
+
+    <h2>AI-assisted projects</h2>
+    <ul class="scripts-list">
+      <li><strong>Cover letter generator (local)</strong> — A Node/Express app that uses Ollama for tailored cover letters from job descriptions, with learning from your edits and guardrails in the prompts (built iteratively with AI-assisted development).</li>
+      <li><strong>Pitch deck generator</strong> — A Python pipeline (ReportLab) that builds client-branded PDF pitch decks: a full narrative deck plus a presenter version with speaker script pages—config-driven per client, no PowerPoint dependency.</li>
+      <li><strong>Autosubtitle generator</strong> — A workflow that turns video or audio into timed subtitle files for faster captioning and editing (speech-to-text with post passes for timing and cleanup).</li>
+      <li><strong>Automation hooks</strong> — n8n workflows and terminal agents (OpenCode) for repeatable tasks that do not belong in the editor alone.</li>
+    </ul>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
+</body>
+</html>
