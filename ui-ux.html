@@ -572,23 +572,6 @@
       color: var(--accent);
       margin: -0.25rem 0 0.75rem;
     }
-    .system-layers {
-      margin: 0 0 1.25rem;
-      padding: 0;
-      list-style: none;
-      font-size: 0.88rem;
-      line-height: 1.55;
-      color: var(--text-muted);
-    }
-    .system-layers li {
-      margin-bottom: 0.65rem;
-      padding-left: 0.85rem;
-      border-left: 2px solid var(--accent);
-    }
-    .system-layers strong {
-      color: var(--text);
-      font-weight: 600;
-    }
     .modular-note {
       margin: 1rem 0 0;
       padding: 0.75rem 1rem;
@@ -881,11 +864,7 @@
                 <article class="ux-visual-card ux-visual-card--primary">
                   <h3 class="ux-visual-title">FX Sesh system architecture</h3>
                   <p class="ux-visual-subtitle">Context assets → Interface → Outputs</p>
-                  <ul class="system-layers">
-                    <li><strong>Context assets:</strong> sessions, news, performance interest—three inputs, three distinct paths.</li>
-                    <li><strong>Interface:</strong> Dashboard, Settings (hub), Alerts, News feed, Trader’s journal.</li>
-                    <li><strong>Outputs:</strong> outcomes aligned under each module.</li>
-                  </ul>
+                  <p class="ux-visual-copy">This diagram illustrates how FX Sesh is structured as a modular system, where information inputs, user interactions, and feedback loops work together to support continuous trading decisions. Each feature is designed not as an isolated tool, but as part of an interconnected workflow that scales with user needs.</p>
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-system-architecture.png?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh system architecture diagram full size">
                     <img src="assets/ui-ux/fxsesh-system-architecture.png?v=1" alt="FX Sesh system architecture: context assets, interface with Settings hub, outputs and use cases, session context and feedback loops" loading="lazy">
                   </a>
@@ -911,6 +890,7 @@
                   <li><strong>Controlled notifications:</strong> Per-session toggles and optional pre-alerts; triggers tie back to session logic so alerts stay predictable, not noisy.</li>
                   <li><strong>Progressive depth:</strong> Sessions first in the IA; journal, news, and learn are modules traders open when ready—scalable structure for future tabs.</li>
                   <li><strong>Consistent surface:</strong> Same brand and patterns across the app and marketing site so the system feels like one product.</li>
+                  <li><strong>Modular Design:</strong> Each component can expand independently without breaking the system.</li>
                 </ul>
               </article>
               <article class="ux-copy-card">
