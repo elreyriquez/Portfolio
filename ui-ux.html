@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    /* Only set <base> when this HTML is served under a subpath (e.g. /portfolio-website/...).
+       Skip file:// and skip when already at site root so relative assets/... resolve like the live site. */
+    (function () {
+      if (!/^https?:$/i.test(location.protocol)) return;
+      var p = location.pathname;
+      if (!p || p === '/') return;
+      var dir;
+      if (p.endsWith('/')) {
+        dir = p;
+      } else {
+        var last = p.split('/').pop() || '';
+        if (last.indexOf('.') !== -1) {
+          dir = p.replace(/[^/]+$/, '');
+        } else {
+          dir = p + '/';
+        }
+      }
+      if (!dir || dir === '/') return;
+      var el = document.createElement('base');
+      el.href = new URL(dir, location.origin).href;
+      document.head.insertBefore(el, document.head.firstChild);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UI/UX | Shaquille Comrie</title>
@@ -681,8 +705,8 @@
       <h2 class="case-studies-title">Case Studies</h2>
 
       <div class="case-study-cards">
-        <!-- FX Sesh card -->
-        <div class="case-study-card card-fxsesh" data-target="detail-fxsesh" role="button" tabindex="0" aria-expanded="false">
+        <!-- FX Sesh card (id for deep links from home page work previews) -->
+        <div id="fxsesh-case" class="case-study-card card-fxsesh" data-target="detail-fxsesh" role="button" tabindex="0" aria-expanded="false">
           <div class="card-inner">
             <div class="card-logo-wrap">
               <img src="assets/ui-ux/fxsesh-logo.png" alt="FX Sesh">

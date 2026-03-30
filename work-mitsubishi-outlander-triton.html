@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function () {
+      if (!/^https?:$/i.test(location.protocol)) return;
+      var p = location.pathname;
+      if (!p || p === '/') return;
+      var dir;
+      if (p.endsWith('/')) {
+        dir = p;
+      } else {
+        var last = p.split('/').pop() || '';
+        if (last.indexOf('.') !== -1) {
+          dir = p.replace(/[^/]+$/, '');
+        } else {
+          dir = p + '/';
+        }
+      }
+      if (!dir || dir === '/') return;
+      var el = document.createElement('base');
+      el.href = new URL(dir, location.origin).href;
+      document.head.insertBefore(el, document.head.firstChild);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitsubishi Outlander &amp; Triton Launch | Shaquille Comrie</title>
+  <script>
+    document.documentElement.setAttribute('data-theme',
+      localStorage.getItem('portfolio-theme') !== 'light' ? 'dark' : 'light'
+    );
+  </script>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/work-case.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <nav class="nav-links">
+      <a href="graphic-design.html">Graphic Design</a>
+      <a href="video-production.html" class="nav-current">Video Production</a>
+      <a href="ui-ux.html">UI/UX</a>
+      <a href="ai-enthusiast.html">AI Enthusiast</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="nav-toggle" class="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme">
+        <span class="theme-icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg></span>
+        <span class="theme-icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></span>
+      </button>
+    </div>
+  </header>
+  <main class="work-case-main">
+    <a href="index.html#selected-work" class="work-case-back">← Selected work</a>
+    <p class="work-case-kicker">Video &amp; motion</p>
+    <h1 class="work-case-title">Mitsubishi Outlander &amp; Triton Launch Kingston 2025</h1>
+    <p class="work-case-sub">Composition, motion graphics</p>
+
+    <div class="work-case-embed">
+      <iframe
+        src="https://www.youtube.com/embed/OboReRP2LeA?rel=0"
+        title="Mitsubishi Outlander &amp; Triton Launch Kingston 2025"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
+
+    <div class="work-case-body">
+      <p>Launch film and supporting motion pieces for the Mitsubishi Outlander and Triton reveal in Kingston. Built to match the energy of a live vehicle debut with clean composition, pacing, and on-screen typography.</p>
+      <p>Work included editorial structure for the main film, motion graphics for titles and supers, and grading-aware graphics that read clearly on venue screens and social cuts. The goal was a premium, automotive feel that stayed legible in fast-cut moments and wide shots.</p>
+    </div>
+  </main>
+  <script src="js/theme.js"></script>
+  <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
+</body>
+</html>

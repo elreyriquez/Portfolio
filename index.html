@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    /* Only set <base> when this HTML is served under a subpath (e.g. /portfolio-website/...).
+       Skip file:// and skip when already at site root so relative assets/... resolve like the live site. */
+    (function () {
+      if (!/^https?:$/i.test(location.protocol)) return;
+      var p = location.pathname;
+      if (!p || p === '/') return;
+      var dir;
+      if (p.endsWith('/')) {
+        dir = p;
+      } else {
+        var last = p.split('/').pop() || '';
+        if (last.indexOf('.') !== -1) {
+          dir = p.replace(/[^/]+$/, '');
+        } else {
+          dir = p + '/';
+        }
+      }
+      if (!dir || dir === '/') return;
+      var el = document.createElement('base');
+      el.href = new URL(dir, location.origin).href;
+      document.head.insertBefore(el, document.head.firstChild);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shaquille Comrie | Portfolio</title>
@@ -24,7 +48,7 @@
       min-height: 100vh;
     }
 
-    /* Landing overlay - gradient/image + logo, fades after 1.8s. Add your image to assets/landing/hero.jpg */
+    /* Landing splash: dark gradient only */
     .landing-overlay {
       position: fixed;
       inset: 0;
@@ -32,10 +56,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-      background-image: url('assets/landing/hero.jpg'), linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      background-color: #07080d;
+      background-image: linear-gradient(
+        145deg,
+        #030305 0%,
+        #0c0e16 22%,
+        #14192a 45%,
+        #1a1f32 68%,
+        #0e111c 100%
+      );
       background-size: cover;
       background-position: center;
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.45);
       transition: opacity 1s ease-out;
       pointer-events: none;
     }
@@ -184,6 +216,7 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
+      background: var(--intro-bg);
     }
     .intro-section .intro-bg-video--day {
       display: none;
@@ -197,12 +230,47 @@
     .intro-section .intro-bg-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 100%);
+      background: linear-gradient(
+        155deg,
+        rgba(5, 7, 14, 0.82) 0%,
+        rgba(12, 16, 32, 0.55) 38%,
+        rgba(18, 22, 40, 0.45) 62%,
+        rgba(6, 8, 18, 0.78) 100%
+      );
       z-index: 1;
     }
+    /* Inverted cursor follower (home only, fine pointer — see js/home-effects.js) */
+    #cursorInvertFollower {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 56px;
+      height: 56px;
+      margin: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10050;
+      background: #fff;
+      mix-blend-mode: difference;
+      transform: translate3d(-9999px, -9999px, 0);
+      will-change: transform;
+    }
+    @media (pointer: coarse) {
+      #cursorInvertFollower {
+        display: none !important;
+      }
+    }
+    html.home-cursor-fx .page-home {
+      cursor: none;
+    }
+    html.home-cursor-fx .page-home a,
+    html.home-cursor-fx .page-home button {
+      cursor: none;
+    }
+
     .intro-section .section-inner {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       text-align: center;
     }
     .intro-section .intro {
@@ -382,6 +450,164 @@
     @media (max-width: 600px) {
       .skill-cards { grid-template-columns: 1fr; }
     }
+
+    /* Work previews (below skill cards) */
+    .work-previews {
+      max-width: 72rem;
+      margin: 3rem auto 0;
+      padding: 0 0 1rem;
+    }
+    .work-previews-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.15rem, 3vw, 1.75rem);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+    .work-previews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .work-preview-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .work-preview-tile-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .work-preview-tile-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 14px;
+    }
+    .work-preview-label {
+      margin: 0;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+      color: var(--text-muted);
+    }
+    .work-preview-subline {
+      margin: 0.3rem 0 0;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      color: var(--text-muted);
+      opacity: 0.92;
+    }
+    .work-preview-tile {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .work-preview-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    }
+    [data-theme="dark"] .work-preview-tile:hover {
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+    .work-preview-tile--video {
+      padding: 0;
+      border: none;
+      background: #000;
+    }
+    .work-preview-tile--video .work-preview-video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+    }
+    /* pointer-events: none so parent page receives mousemove (custom cursor). Playback is autoplay+loop via URL. */
+    .work-preview-tile--video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
+    }
+    .work-preview-tile--fx {
+      border: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+    .work-preview-tile--fx a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 374px;
+      padding: 2rem;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(10, 43, 87, 0.95) 0%, rgba(22, 65, 130, 0.85) 50%, rgba(10, 43, 87, 0.95) 100%);
+      height: 100%;
+    }
+    .work-preview-tile--fx .work-preview-fx-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes fxsesh-logo-breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .work-preview-tile--fx .work-preview-fx-logo img {
+      max-width: 192px;
+      max-height: 108px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transform-origin: center center;
+      animation: fxsesh-logo-breathe 4s ease-in-out infinite;
+    }
+    .work-preview-tile--fx a:hover .work-preview-fx-logo img,
+    .work-preview-tile--fx a:focus-visible .work-preview-fx-logo img {
+      animation: none;
+      transform: scale(1);
+      transition: transform 0.4s ease-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .work-preview-tile--fx .work-preview-fx-logo img {
+        animation: none;
+      }
+    }
+    .work-preview-tile--image a {
+      display: block;
+      position: relative;
+      background: rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="dark"] .work-preview-tile--image a {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .work-preview-tile--image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .work-preview-tile--image:hover img {
+      transform: scale(1.03);
+    }
+    @media (max-width: 700px) {
+      .work-previews-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .work-exp-section {
       background: #2d2d2d;
       padding: 4rem 2rem;
@@ -489,12 +715,13 @@
   </style>
 </head>
 <body class="page-home">
+  <div id="cursorInvertFollower" aria-hidden="true"></div>
   <div class="landing-overlay" id="landingOverlay">
-    <img src="assets/logo/SECLogo.png" alt="SEC" class="landing-overlay-logo">
+    <img src="assets/logo/SECLogo.png" alt="SEC" class="landing-overlay-logo" decoding="async" fetchpriority="high">
   </div>
 
   <header class="site-header">
-    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie"></a></div>
+    <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie" decoding="async" fetchpriority="high"></a></div>
     <nav class="nav-links">
       <a href="graphic-design.html">Graphic Design</a>
       <a href="video-production.html">Video Production</a>
@@ -516,10 +743,10 @@
   </header>
   <main>
     <section class="page-section intro-section" id="intro">
-      <video class="intro-bg-video intro-bg-video--night" autoplay muted loop playsinline aria-hidden="true">
+      <video class="intro-bg-video intro-bg-video--night" autoplay muted loop playsinline aria-hidden="true" preload="auto">
         <source src="assets/landing/intro-bg.mp4" type="video/mp4">
       </video>
-      <video class="intro-bg-video intro-bg-video--day" autoplay muted loop playsinline aria-hidden="true">
+      <video class="intro-bg-video intro-bg-video--day" autoplay muted loop playsinline aria-hidden="true" preload="auto">
         <source src="assets/landing/day-intro-bg.mp4" type="video/mp4">
       </video>
       <div class="intro-bg-overlay"></div>
@@ -562,6 +789,63 @@
           <span class="skill-card-btn">Explore →</span>
         </a>
       </div>
+
+      <div class="work-previews" id="selected-work">
+        <h3 class="work-previews-title">Selected work</h3>
+        <div class="work-previews-grid">
+          <div class="work-preview-cell">
+            <a href="work-mitsubishi-outlander-triton.html" class="work-preview-tile-link">
+              <div class="work-preview-tile work-preview-tile--video">
+                <div class="work-preview-video-wrap">
+                  <iframe
+                    src="https://www.youtube.com/embed/OboReRP2LeA?autoplay=1&mute=1&playsinline=1&rel=0&loop=1&playlist=OboReRP2LeA"
+                    title="Mitsubishi Outlander &amp; Triton Launch Kingston 2025"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                  ></iframe>
+                </div>
+              </div>
+            </a>
+            <p class="work-preview-label">Mitsubishi Outlander &amp; Triton Launch Kingston 2025</p>
+            <p class="work-preview-subline">Composition, Motion Graphics</p>
+          </div>
+
+          <div class="work-preview-cell">
+            <div class="work-preview-tile work-preview-tile--fx">
+              <a href="ui-ux.html#fxsesh-case">
+                <div class="work-preview-fx-logo">
+                  <img src="assets/ui-ux/fxsesh-logo.png" alt="FX Sesh logo">
+                </div>
+              </a>
+            </div>
+            <p class="work-preview-label">FX Sesh UI/UX Case Study</p>
+            <p class="work-preview-subline">UI/UX, Backend, Project Management</p>
+          </div>
+
+          <div class="work-preview-cell">
+            <div class="work-preview-tile work-preview-tile--image">
+              <a href="work-blu-martini-events.html">
+                <img src="assets/work-previews/blu-martini-flyer.jpg" alt="Blu Martini Lounge &amp; Pub Love &amp; Luxe Valentine&#39;s Experience flyer" loading="lazy" width="819" height="1024">
+              </a>
+            </div>
+            <p class="work-preview-label">BLU Martini Events</p>
+            <p class="work-preview-subline">Graphic Design</p>
+          </div>
+
+          <div class="work-preview-cell">
+            <div class="work-preview-tile work-preview-tile--image">
+              <a href="work-sec-freelance-brand.html">
+                <img src="assets/work-previews/sec-freelance-services-brand.png" alt="SEC Freelance Services brand identity" loading="lazy" width="1024" height="1024">
+              </a>
+            </div>
+            <p class="work-preview-label">SEC Freelance Services Brand Identity</p>
+            <p class="work-preview-subline">Logo Design, Brand Management</p>
+          </div>
+        </div>
+      </div>
+
       <div class="section-inner">
         <div class="design-approach">
           <h3 class="design-approach-title">Design Approach</h3>
@@ -654,6 +938,7 @@
     </div>
   </main>
   <script src="js/theme.js"></script>
+  <script src="js/home-effects.js"></script>
   <script>
     (function() {
       var overlay = document.getElementById('landingOverlay');
@@ -669,11 +954,11 @@
             var curOrigin = location.origin || (location.protocol + '//' + location.host);
             var sameOrigin = (refUrl.origin === curOrigin) ||
               (location.protocol === 'file:' && ref.indexOf('file:') === 0);
-            var internalPage = /(graphic-design|video-production|ui-ux|contact)\.html/.test(refUrl.pathname) ||
+            var internalPage = /(graphic-design|video-production|ui-ux|contact|work-[\w-]+\.html)/.test(refUrl.pathname) ||
               /(graphic-design|video-production|ui-ux|contact)\/?$/.test(refUrl.pathname);
             if (sameOrigin && internalPage) skipOverlay = true;
           } catch (e) {
-            if (ref.indexOf(location.host) !== -1 && /(graphic-design|video-production|ui-ux|contact)/.test(ref)) {
+            if (ref.indexOf(location.host) !== -1 && /(graphic-design|video-production|ui-ux|contact|work-)/.test(ref)) {
               skipOverlay = true;
             }
           }
