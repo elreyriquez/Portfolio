@@ -2,12 +2,12 @@
 
 ## Folder structure
 
-- **downloaded/** — Images pulled from Wix (run `scripts/download-graphic-design-images.sh` first)
-- **Illustrations/** — Your illustration work
-- **Logos/** — Logo designs (e.g. JustShipIt)
-- **Events/** — Event-related graphics
-- **Food/** — Food/beverage design work
-- **Corporate/** — Corporate/brand work
+- **downloaded/**: Images pulled from Wix (run `scripts/download-graphic-design-images.sh` first)
+- **Illustrations/**: Your illustration work
+- **Logos/**: Logo designs (e.g. JustShipIt)
+- **Events/**: Event-related graphics
+- **Food/**: Food/beverage design work
+- **Corporate/**: Corporate/brand work
 
 ## Workflow
 

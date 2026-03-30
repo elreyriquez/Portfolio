@@ -238,6 +238,65 @@
       line-height: 1.6;
       margin: 0 0 2rem;
     }
+    .case-study-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: -0.35rem 0 1rem;
+    }
+    .case-study-intro {
+      margin: 0 0 1.75rem;
+      max-width: 46rem;
+    }
+    .case-study-intro p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 0 0 1rem;
+    }
+    .case-study-intro p:last-child {
+      margin-bottom: 0;
+    }
+    /* FX Sesh: vertical narrative (problem → approach → features) */
+    .fxsesh-case-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 0.35rem;
+    }
+    .fxsesh-case-flow > .detail-card {
+      max-width: 100%;
+    }
+    .fxsesh-narrative {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 0;
+      max-width: 42rem;
+    }
+    .fxsesh-narrative + .detail-card {
+      margin-top: 0;
+    }
+    .fxsesh-narrative--spaced {
+      margin-bottom: 1.25rem;
+    }
+    .detail-card .detail-feature-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      margin: 1.15rem 0 0.4rem;
+    }
+    .detail-card .detail-feature-title:first-of-type {
+      margin-top: 0;
+    }
+    .detail-card .detail-feature-title + p {
+      margin-top: 0;
+    }
 
     /* Detail cards grid – variable height, align to top */
     .detail-cards {
@@ -245,11 +304,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
       align-items: start;
-    }
-    /* FX Sesh: Problem, Approach, Key features — above UI/UX tabs, apply to both */
-    .fxsesh-shared-cards {
-      grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 0.25rem;
     }
     @media (max-width: 900px) {
       .detail-cards { grid-template-columns: repeat(2, 1fr); }
@@ -278,6 +332,7 @@
       margin: 0;
     }
     .detail-card p + p { margin-top: 0.75rem; }
+    .detail-card p + ul { margin-top: 0.65rem; }
     .detail-card ul { list-style: disc; padding-left: 1.2rem; }
     .detail-card li { margin-bottom: 0.3rem; }
     .detail-card li:last-child { margin-bottom: 0; }
@@ -535,7 +590,7 @@
       display: block;
       vertical-align: top;
     }
-    /* FX Sesh — tech stack (below UI/UX tabs, above challenges) */
+    /* FX Sesh: tech stack (below UI/UX tabs, above challenges) */
     .fxsesh-tech-stack {
       margin-top: 2rem;
       padding-top: 1.75rem;
@@ -577,7 +632,7 @@
       margin-bottom: 0;
     }
 
-    /* FX Sesh — challenges & trade-offs */
+    /* FX Sesh: challenges & trade-offs */
     .fxsesh-challenges {
       margin-top: 2rem;
       padding-top: 1.75rem;
@@ -895,35 +950,50 @@
           <div class="detail-panel-sep"></div>
           <p class="case-study-label">Case Study</p>
           <h2 class="case-study-title">FX Sesh</h2>
-          <p class="case-study-tagline">A foreign exchange market session product with various features such as session alerts, user journal, and economic news wired into one trader workflow.</p>
-          <div class="detail-cards fxsesh-shared-cards">
+          <p class="case-study-subtitle">Trading companion app</p>
+          <div class="case-study-intro">
+            <p>FX Sesh is a mobile application designed to help traders stay consistent, informed, and self-aware during their trading journey.</p>
+            <p>Many retail traders struggle with fragmented tools: switching between charts, news sources, and journaling platforms, which leads to poor decision-making and a lack of structured review.</p>
+            <p>I set out to design a system that consolidates these essential functions into a single, intuitive experience, focusing on clarity, speed, and usability.</p>
+          </div>
+
+          <div class="fxsesh-case-flow">
+            <p class="fxsesh-narrative">While exploring this space, I identified several recurring issues that negatively impact trader performance.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Problem</h3>
               <ul>
-                <li>Traders juggle four global sessions (Sydney, Tokyo, London, New York) and constant time-zone confusion.</li>
-                <li>Most tools are web-only, cluttered, or bury session info inside full trading platforms.</li>
-                <li>People waste mental energy on "when does London open?" instead of focusing on the trade.</li>
+                <li>Lack of structured journaling tools for tracking performance</li>
+                <li>Poor awareness of trading sessions and timing</li>
+                <li>Fragmented access to news and learning resources</li>
+                <li>Overly complex or bloated existing platforms</li>
               </ul>
             </div>
+            <p class="fxsesh-narrative">To address these challenges, I focused on designing a system that prioritizes simplicity, accessibility, and functional depth without overwhelming the user.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Approach</h3>
+              <p>My approach centered on building a lightweight but powerful ecosystem where each feature serves a clear purpose:</p>
               <ul>
-                <li>Mobile-first experience that answers one question: <em>when are the sessions, and what's open right now?</em></li>
-                <li>Improve clarity and readability.</li>
-                <li>Create a scalable and consistent design system.</li>
-                <li>Brand extended to a marketing site that drives installs and explains value.</li>
+                <li>Reduce friction in daily trading workflows</li>
+                <li>Encourage consistency through structured journaling</li>
+                <li>Improve awareness through timely notifications</li>
+                <li>Provide accessible learning and market context</li>
               </ul>
             </div>
+            <p class="fxsesh-narrative">This approach informed both the structure of the app and the features I prioritized.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Key features</h3>
-              <ul>
-                <li>Session Clocks and Timers</li>
-                <li>Trader&#39;s Journal</li>
-                <li>Push Notifications Alerts</li>
-                <li>Market News</li>
-              </ul>
+              <p class="detail-feature-title">Journaling</p>
+              <p>I designed a structured journaling system to help traders track performance over time, with built-in calculations for win/loss ratios and average returns. That encourages reflection and consistency, two factors that matter for long-term discipline.</p>
+              <p class="detail-feature-title">Session notifications</p>
+              <p>To improve timing and awareness, I implemented session-based notifications that alert users during key market overlaps so they stay aligned with high-activity periods.</p>
+              <p class="detail-feature-title">News integration</p>
+              <p>Because financial data APIs are costly at this stage, I opted for an RSS-based news system: a deliberate trade-off that keeps value high while keeping the product lightweight and sustainable.</p>
+              <p class="detail-feature-title">Learn tab</p>
+              <p>I introduced a curated learning section for traders who are still building skills, so the app works as a resource, not only a utility.</p>
             </div>
           </div>
+
+          <p class="fxsesh-narrative fxsesh-narrative--spaced">These decisions translated into a clean, structured interface built for quick access and minimal friction.</p>
 
           <div class="tab-toggle" role="tablist" aria-label="UI or UX view">
             <button type="button" id="tab-ui" class="tab-btn is-active" data-tab="ui" role="tab" aria-selected="true">UI</button>
@@ -933,8 +1003,8 @@
           <div class="detail-cards">
             <div class="detail-card">
               <h3 class="detail-card-title">Design logic</h3>
-              <p>The app is organized as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole.</p>
-              <p>Visual hierarchy, spacing, and type do the same job at the UI layer: primary session state reads first; depth (journal, news) stays one tap away when traders want it.</p>
+              <p>The interface emphasizes clarity and hierarchy so users can reach key tools quickly without noise. Visual consistency and spacing were tuned to support usability across sessions, journal, news, and learn.</p>
+              <p>I organized the product as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole. At the UI layer, primary session state reads first; depth stays one tap away when traders want it.</p>
             </div>
             <div class="detail-card">
               <h3 class="detail-card-title">Color Palette</h3>
@@ -1055,12 +1125,12 @@
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-user-journey-map.png?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh journey map PNG full size">
                     <img src="assets/ui-ux/fxsesh-user-journey-map.png" alt="FX Sesh user journey map (earlier sketch)" loading="eager" decoding="async">
                   </a>
-                  <p class="modular-note">Modular design: each major area can evolve (e.g. journal or alerts) without collapsing the rest of the system—as long as navigation and session logic stay consistent.</p>
+                  <p class="modular-note">Modular design: each major area can evolve (e.g. journal or alerts) without collapsing the rest of the system, as long as navigation and session logic stay consistent.</p>
                 </article>
                 <article class="ux-visual-card">
                   <h3 class="ux-visual-title">Intent &amp; decision flow</h3>
                   <p class="ux-visual-subtitle">Where logic branches</p>
-                  <p class="ux-visual-copy">This wireframe shows decision paths: if the user’s intent is session check vs. reminder setup vs. trade log vs. news, the product routes them without forcing a single highway. Same system as above—here with explicit if/then-style branching for reviewers who read flow.</p>
+                  <p class="ux-visual-copy">This wireframe shows decision paths: if the user’s intent is session check vs. reminder setup vs. trade log vs. news, the product routes them without forcing a single highway. Same system as above, shown here with explicit if/then-style branching for reviewers who read flow.</p>
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-decision-wireframe.png" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh decision flow wireframe full size">
                     <img src="assets/ui-ux/fxsesh-decision-wireframe.png" alt="FX Sesh decision flow: branching paths by user intent" loading="eager" decoding="async">
                   </a>
@@ -1069,9 +1139,9 @@
               <article class="ux-copy-card">
                 <h3 class="ux-copy-title">System &amp; experience decisions</h3>
                 <ul>
-                  <li><strong>Session at a glance:</strong> Digital and analog clock views with swipe; open/closed state and countdown to next open/close—the anchor module.</li>
+                  <li><strong>Session at a glance:</strong> Digital and analog clock views with swipe; open/closed state and countdown to next open/close (the anchor module).</li>
                   <li><strong>Controlled notifications:</strong> Per-session toggles and optional pre-alerts; triggers tie back to session logic so alerts stay predictable, not noisy.</li>
-                  <li><strong>Progressive depth:</strong> Sessions first in the IA; journal, news, and learn are modules traders open when ready—scalable structure for future tabs.</li>
+                  <li><strong>Progressive depth:</strong> Sessions first in the IA; journal, news, and learn are modules traders open when ready, with room to scale new tabs later.</li>
                   <li><strong>Consistent surface:</strong> Same brand and patterns across the app and marketing site so the system feels like one product.</li>
                   <li><strong>Modular Design:</strong> Each component can expand independently without breaking the system.</li>
                 </ul>
@@ -1134,6 +1204,7 @@
           </section>
 
           <section class="fxsesh-challenges" aria-labelledby="fxsesh-challenges-heading">
+            <p class="fxsesh-narrative fxsesh-narrative--spaced">Throughout development, several constraints influenced key decisions and shaped the final product.</p>
             <h3 class="fxsesh-challenges-heading" id="fxsesh-challenges-heading">Core challenges &amp; trade-offs</h3>
             <p class="fxsesh-challenges-intro">Shipping FX Sesh meant choosing under real limits: cost, time, what the stack can do, and how the product should feel day to day. Each row below is the problem as it showed up, then what I gave up or kept instead.</p>
             <div class="fxsesh-accordion">
