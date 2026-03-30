@@ -297,6 +297,36 @@
     .detail-card .detail-feature-title + p {
       margin-top: 0;
     }
+    .fxsesh-ui-preface {
+      margin: 0 0 1.35rem;
+      max-width: 48rem;
+    }
+    .fxsesh-ui-preface p {
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin: 0 0 0.75rem;
+    }
+    .fxsesh-ui-preface p:last-child {
+      margin-bottom: 0;
+    }
+    .fxsesh-decision-snapshot {
+      margin: 0 0 1.35rem;
+      padding-left: 1.2rem;
+      max-width: 46rem;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+    .fxsesh-decision-snapshot li {
+      margin-bottom: 0.45rem;
+    }
+    .fxsesh-decision-snapshot li:last-child {
+      margin-bottom: 0;
+    }
+    .fxsesh-reflection-wrap {
+      margin-top: 2rem;
+    }
 
     /* Detail cards grid – variable height, align to top */
     .detail-cards {
@@ -950,61 +980,60 @@
           <div class="detail-panel-sep"></div>
           <p class="case-study-label">Case Study</p>
           <h2 class="case-study-title">FX Sesh</h2>
-          <p class="case-study-subtitle">Trading companion app</p>
+          <p class="case-study-subtitle">Trading Companion App</p>
           <div class="case-study-intro">
-            <p>FX Sesh is a mobile application designed to help traders stay consistent, informed, and self-aware during their trading journey.</p>
-            <p>Many retail traders struggle with fragmented tools: switching between charts, news sources, and journaling platforms, which leads to poor decision-making and a lack of structured review.</p>
-            <p>I set out to design a system that consolidates these essential functions into a single, intuitive experience, focusing on clarity, speed, and usability.</p>
+            <p>FX Sesh is a mobile application I designed to help traders operate with more structure, awareness, and consistency.</p>
+            <p>Many retail traders rely on fragmented tools: switching between charts, news platforms, and journaling apps, which often leads to disorganized workflows and inconsistent decision-making.</p>
+            <p>I set out to design a unified system that simplifies this process, bringing key tools into a single, intuitive experience.</p>
           </div>
 
           <div class="fxsesh-case-flow">
-            <p class="fxsesh-narrative">While exploring this space, I identified several recurring issues that negatively impact trader performance.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Problem</h3>
+              <p>Through research and observation, I identified several recurring issues:</p>
               <ul>
-                <li>Lack of structured journaling tools for tracking performance</li>
-                <li>Poor awareness of trading sessions and timing</li>
+                <li>Lack of structured journaling for tracking performance</li>
+                <li>Poor awareness of trading sessions and optimal timing</li>
                 <li>Fragmented access to news and learning resources</li>
-                <li>Overly complex or bloated existing platforms</li>
+                <li>Overly complex platforms that overwhelm newer traders</li>
               </ul>
             </div>
-            <p class="fxsesh-narrative">To address these challenges, I focused on designing a system that prioritizes simplicity, accessibility, and functional depth without overwhelming the user.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Approach</h3>
-              <p>My approach centered on building a lightweight but powerful ecosystem where each feature serves a clear purpose:</p>
-              <ul>
-                <li>Reduce friction in daily trading workflows</li>
-                <li>Encourage consistency through structured journaling</li>
-                <li>Improve awareness through timely notifications</li>
-                <li>Provide accessible learning and market context</li>
-              </ul>
+              <p>To address these challenges, I focused on designing a system that prioritizes clarity, speed, and usability without sacrificing functional depth.</p>
+              <p>My approach centered on reducing friction in daily workflows while encouraging consistency and informed decision-making.</p>
             </div>
             <p class="fxsesh-narrative">This approach informed both the structure of the app and the features I prioritized.</p>
             <div class="detail-card">
               <h3 class="detail-card-title">Key features</h3>
-              <p class="detail-feature-title">Journaling</p>
-              <p>I designed a structured journaling system to help traders track performance over time, with built-in calculations for win/loss ratios and average returns. That encourages reflection and consistency, two factors that matter for long-term discipline.</p>
+              <p class="detail-feature-title">Journaling system</p>
+              <p>I designed a structured journaling system to help traders track and evaluate their performance over time.</p>
+              <p>By integrating metrics such as win/loss ratio and average returns, the system encourages reflection and reinforces disciplined trading habits.</p>
               <p class="detail-feature-title">Session notifications</p>
-              <p>To improve timing and awareness, I implemented session-based notifications that alert users during key market overlaps so they stay aligned with high-activity periods.</p>
+              <p>To improve market awareness, I implemented session-based notifications that alert users during key trading periods and session overlaps.</p>
+              <p>This helps traders align their activity with high-volume market conditions.</p>
               <p class="detail-feature-title">News integration</p>
-              <p>Because financial data APIs are costly at this stage, I opted for an RSS-based news system: a deliberate trade-off that keeps value high while keeping the product lightweight and sustainable.</p>
+              <p>Due to the high cost of financial data APIs, I opted for an RSS-based solution: a deliberate trade-off that maintains relevant information while keeping the product lightweight and sustainable.</p>
               <p class="detail-feature-title">Learn tab</p>
-              <p>I introduced a curated learning section for traders who are still building skills, so the app works as a resource, not only a utility.</p>
+              <p>I introduced a curated learning section to support traders who are still developing their skills, so the app works as a resource, not only a utility.</p>
             </div>
           </div>
 
-          <p class="fxsesh-narrative fxsesh-narrative--spaced">These decisions translated into a clean, structured interface built for quick access and minimal friction.</p>
+          <p class="fxsesh-narrative fxsesh-narrative--spaced">These decisions shaped how I structured the interface and what I showed first in the UI.</p>
 
           <div class="tab-toggle" role="tablist" aria-label="UI or UX view">
             <button type="button" id="tab-ui" class="tab-btn is-active" data-tab="ui" role="tab" aria-selected="true">UI</button>
             <button type="button" id="tab-ux" class="tab-btn" data-tab="ux" role="tab" aria-selected="false">UX</button>
           </div>
           <div class="tab-content-panel is-visible" id="fxsesh-ui" role="tabpanel" aria-labelledby="tab-ui">
+          <div class="fxsesh-ui-preface">
+            <p>The interface was designed to support fast decision-making and reduce cognitive load.</p>
+            <p>I focused on clear hierarchy, consistent spacing, and intuitive navigation so users can access key features quickly without unnecessary friction.</p>
+          </div>
           <div class="detail-cards">
             <div class="detail-card">
               <h3 class="detail-card-title">Design logic</h3>
-              <p>The interface emphasizes clarity and hierarchy so users can reach key tools quickly without noise. Visual consistency and spacing were tuned to support usability across sessions, journal, news, and learn.</p>
-              <p>I organized the product as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole. At the UI layer, primary session state reads first; depth stays one tap away when traders want it.</p>
+              <p>I organized the product as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole. Primary session state reads first; depth stays one tap away when traders want it.</p>
             </div>
             <div class="detail-card">
               <h3 class="detail-card-title">Color Palette</h3>
@@ -1204,7 +1233,13 @@
           </section>
 
           <section class="fxsesh-challenges" aria-labelledby="fxsesh-challenges-heading">
-            <p class="fxsesh-narrative fxsesh-narrative--spaced">Throughout development, several constraints influenced key decisions and shaped the final product.</p>
+            <p class="fxsesh-narrative fxsesh-narrative--spaced">Throughout development, several constraints influenced key decisions and shaped the final product:</p>
+            <ul class="fxsesh-decision-snapshot">
+              <li>Prioritized cost efficiency by replacing expensive APIs with RSS-based data</li>
+              <li>Chose rapid iteration over early test coverage to accelerate development</li>
+              <li>Leveraged Expo for speed, while accepting limitations in advanced testing</li>
+              <li>Balanced monetization with usability through non-intrusive ad integration</li>
+            </ul>
             <h3 class="fxsesh-challenges-heading" id="fxsesh-challenges-heading">Core challenges &amp; trade-offs</h3>
             <p class="fxsesh-challenges-intro">Shipping FX Sesh meant choosing under real limits: cost, time, what the stack can do, and how the product should feel day to day. Each row below is the problem as it showed up, then what I gave up or kept instead.</p>
             <div class="fxsesh-accordion">
@@ -1312,6 +1347,14 @@
               </details>
             </div>
           </section>
+
+          <div class="fxsesh-reflection-wrap">
+            <div class="detail-card">
+              <h3 class="detail-card-title">Reflection</h3>
+              <p>This project reinforced the importance of balancing usability, performance, and sustainability when building real-world products.</p>
+              <p>It also highlighted the value of designing systems, not just interfaces, that support long-term user behavior and decision-making.</p>
+            </div>
+          </div>
 
           <div class="outcome-section">
             <h3 class="detail-card-title">Outcome</h3>
