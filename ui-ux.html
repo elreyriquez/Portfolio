@@ -246,6 +246,11 @@
       gap: 1.25rem;
       align-items: start;
     }
+    /* FX Sesh: Problem, Approach, Key features — above UI/UX tabs, apply to both */
+    .fxsesh-shared-cards {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 0.25rem;
+    }
     @media (max-width: 900px) {
       .detail-cards { grid-template-columns: repeat(2, 1fr); }
     }
@@ -413,7 +418,6 @@
       display: block;
       vertical-align: top;
     }
-
     /* Modal for screenshot explanation */
     .screen-modal {
       display: none;
@@ -531,11 +535,168 @@
       display: block;
       vertical-align: top;
     }
+    /* FX Sesh — tech stack (below UI/UX tabs, above challenges) */
+    .fxsesh-tech-stack {
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .fxsesh-tech-intro {
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin: 0 0 1.25rem;
+      max-width: 52rem;
+    }
+    .fxsesh-tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: 1.25rem 1.5rem;
+      align-items: start;
+    }
+    .fxsesh-tech-group h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.5rem;
+    }
+    .fxsesh-tech-group ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+    .fxsesh-tech-group li {
+      margin-bottom: 0.3rem;
+    }
+    .fxsesh-tech-group li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* FX Sesh — challenges & trade-offs */
+    .fxsesh-challenges {
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .fxsesh-challenges-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+      margin: 0 0 0.5rem;
+      color: var(--text);
+    }
+    .fxsesh-challenges-intro {
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin: 0 0 1.25rem;
+      max-width: 52rem;
+    }
+    .fxsesh-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .fxsesh-details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    [data-theme="dark"] .fxsesh-details {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .fxsesh-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.15rem 1rem 1.25rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      transition: background 0.15s ease;
+    }
+    .fxsesh-details summary::-webkit-details-marker {
+      display: none;
+    }
+    .fxsesh-details summary::after {
+      content: '';
+      width: 0.5rem;
+      height: 0.5rem;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      margin-top: -0.2rem;
+      transition: transform 0.2s ease;
+    }
+    .fxsesh-details[open] summary::after {
+      transform: rotate(-135deg);
+      margin-top: 0.15rem;
+    }
+    .fxsesh-details summary:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    [data-theme="dark"] .fxsesh-details summary:hover {
+      background: rgba(255,255,255,0.04);
+    }
+    .fxsesh-details-body {
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .fxsesh-details-body h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1rem 0 0.4rem;
+    }
+    .fxsesh-details-body h4:first-child {
+      margin-top: 0.85rem;
+    }
+    .fxsesh-details-body ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .fxsesh-details-body li {
+      margin-bottom: 0.35rem;
+    }
+    .fxsesh-details-body li:last-child {
+      margin-bottom: 0;
+    }
+    .fxsesh-details-trade {
+      display: grid;
+      gap: 0.35rem;
+      margin: 0.35rem 0 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+    .fxsesh-details-trade span {
+      display: block;
+      padding-left: 0.15rem;
+    }
+
     /* UI / UX tab toggle */
     .tab-toggle {
       display: flex;
       gap: 0.5rem;
-      margin-top: 1rem;
+      margin-top: 1.75rem;
       margin-bottom: 2rem;
     }
     .tab-toggle button {
@@ -719,7 +880,7 @@
         <div class="case-study-card card-gspco" data-target="detail-gspco" role="button" tabindex="0" aria-expanded="false">
           <div class="card-inner">
             <div class="card-logo-wrap">
-              <img src="assets/ui-ux/gspco-logo.png" alt="Grant Stewart Phillips & Co">
+              <img src="assets/ui-ux/gspco-logo.png" alt="Grant Stewart Phillips &amp; Co">
             </div>
             <p class="card-brief">Standard Client Website Design.</p>
           </div>
@@ -735,12 +896,7 @@
           <p class="case-study-label">Case Study</p>
           <h2 class="case-study-title">FX Sesh</h2>
           <p class="case-study-tagline">A foreign exchange market session product with various features such as session alerts, user journal, and economic news wired into one trader workflow.</p>
-          <div class="tab-toggle" role="tablist" aria-label="UI or UX view">
-            <button type="button" id="tab-ui" class="tab-btn is-active" data-tab="ui" role="tab" aria-selected="true">UI</button>
-            <button type="button" id="tab-ux" class="tab-btn" data-tab="ux" role="tab" aria-selected="false">UX</button>
-          </div>
-          <div class="tab-content-panel is-visible" id="fxsesh-ui" role="tabpanel" aria-labelledby="tab-ui">
-          <div class="detail-cards">
+          <div class="detail-cards fxsesh-shared-cards">
             <div class="detail-card">
               <h3 class="detail-card-title">Problem</h3>
               <ul>
@@ -758,6 +914,23 @@
                 <li>Brand extended to a marketing site that drives installs and explains value.</li>
               </ul>
             </div>
+            <div class="detail-card">
+              <h3 class="detail-card-title">Key features</h3>
+              <ul>
+                <li>Session Clocks and Timers</li>
+                <li>Trader&#39;s Journal</li>
+                <li>Push Notifications Alerts</li>
+                <li>Market News</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-toggle" role="tablist" aria-label="UI or UX view">
+            <button type="button" id="tab-ui" class="tab-btn is-active" data-tab="ui" role="tab" aria-selected="true">UI</button>
+            <button type="button" id="tab-ux" class="tab-btn" data-tab="ux" role="tab" aria-selected="false">UX</button>
+          </div>
+          <div class="tab-content-panel is-visible" id="fxsesh-ui" role="tabpanel" aria-labelledby="tab-ui">
+          <div class="detail-cards">
             <div class="detail-card">
               <h3 class="detail-card-title">Design logic</h3>
               <p>The app is organized as modules (sessions, alerts, journal, news, learn) that share one navigation model and brand system, so new features can plug in without breaking the whole.</p>
@@ -829,15 +1002,6 @@
             </div>
           </div>
 
-          <div class="outcome-section">
-            <h3 class="detail-card-title">Outcome</h3>
-            <ul>
-              <li>FX Sesh live on App Store and Google Play with a companion website for discovery and support.</li>
-              <li>Built with Expo/React Native (iOS + Android from one codebase) and a static marketing site for fast, reliable presence.</li>
-              <li>Freemium model: ad-supported free tier live, premium subscription with journal, widget, pre-alerts, and overlap notifications in beta.</li>
-            </ul>
-          </div>
-
           <div class="case-study-footer">
             <div class="case-study-screens" id="fxsesh-screens">
               <div class="screen-slot" data-title="Digital Clock" data-explanation="The primary session view: one glance shows local time and which sessions are open. I kept the hierarchy clear (time dominant, session labels secondary) so traders don't have to decode the screen.">
@@ -885,11 +1049,11 @@
                   <p class="ux-visual-subtitle">Context assets → Interface → Outputs</p>
                   <p class="ux-visual-copy">This diagram illustrates how FX Sesh is structured as a modular system, where information inputs, user interactions, and feedback loops work together to support continuous trading decisions. Each feature is designed not as an isolated tool, but as part of an interconnected workflow that scales with user needs.</p>
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-system-architecture.png?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh system architecture diagram full size">
-                    <img src="assets/ui-ux/fxsesh-system-architecture.png?v=2" alt="FX Sesh system architecture: context assets, interface with Settings hub, labeled flows, outputs, and feedback loops" loading="lazy">
+                    <img src="assets/ui-ux/fxsesh-system-architecture.png" alt="FX Sesh system architecture: context assets, interface with Settings hub, labeled flows, outputs, and feedback loops" loading="eager" decoding="async">
                   </a>
                   <p class="ux-visual-copy">This system is designed as a continuous feedback loop where inputs inform decisions, actions are logged, and outcomes refine future strategies.</p>
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-user-journey-map.png?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh journey map PNG full size">
-                    <img src="assets/ui-ux/fxsesh-user-journey-map.png?v=4" alt="FX Sesh user journey map (earlier sketch)" loading="lazy">
+                    <img src="assets/ui-ux/fxsesh-user-journey-map.png" alt="FX Sesh user journey map (earlier sketch)" loading="eager" decoding="async">
                   </a>
                   <p class="modular-note">Modular design: each major area can evolve (e.g. journal or alerts) without collapsing the rest of the system—as long as navigation and session logic stay consistent.</p>
                 </article>
@@ -898,7 +1062,7 @@
                   <p class="ux-visual-subtitle">Where logic branches</p>
                   <p class="ux-visual-copy">This wireframe shows decision paths: if the user’s intent is session check vs. reminder setup vs. trade log vs. news, the product routes them without forcing a single highway. Same system as above—here with explicit if/then-style branching for reviewers who read flow.</p>
                   <a class="ux-visual-link" href="assets/ui-ux/fxsesh-decision-wireframe.png" target="_blank" rel="noopener noreferrer" aria-label="Open FX Sesh decision flow wireframe full size">
-                    <img src="assets/ui-ux/fxsesh-decision-wireframe.png" alt="FX Sesh decision flow: branching paths by user intent" loading="lazy">
+                    <img src="assets/ui-ux/fxsesh-decision-wireframe.png" alt="FX Sesh decision flow: branching paths by user intent" loading="eager" decoding="async">
                   </a>
                 </article>
               </div>
@@ -918,6 +1082,175 @@
               </article>
             </div>
           </div>
+
+          <section class="fxsesh-tech-stack" aria-labelledby="fxsesh-tech-heading">
+            <h3 class="fxsesh-challenges-heading" id="fxsesh-tech-heading">Tech stack</h3>
+            <p class="fxsesh-tech-intro">Languages, frameworks, and tools used to ship the FX Sesh mobile app, integrations, and the companion marketing site.</p>
+            <div class="fxsesh-tech-grid">
+              <div class="fxsesh-tech-group">
+                <h4>Languages</h4>
+                <ul>
+                  <li>JavaScript</li>
+                  <li>JSX</li>
+                </ul>
+              </div>
+              <div class="fxsesh-tech-group">
+                <h4>Mobile app</h4>
+                <ul>
+                  <li>React Native</li>
+                  <li>Expo</li>
+                </ul>
+              </div>
+              <div class="fxsesh-tech-group">
+                <h4>Integrations</h4>
+                <ul>
+                  <li>Google Mobile Ads (AdMob)</li>
+                  <li>RSS feeds (market news)</li>
+                  <li>Push notifications (Expo)</li>
+                </ul>
+              </div>
+              <div class="fxsesh-tech-group">
+                <h4>Companion website</h4>
+                <ul>
+                  <li>HTML, CSS, JavaScript</li>
+                  <li>GitHub Pages (static hosting)</li>
+                </ul>
+              </div>
+              <div class="fxsesh-tech-group">
+                <h4>Tooling</h4>
+                <ul>
+                  <li>Git &amp; GitHub</li>
+                  <li>npm</li>
+                  <li>Expo CLI / EAS</li>
+                </ul>
+              </div>
+              <div class="fxsesh-tech-group">
+                <h4>Design</h4>
+                <ul>
+                  <li>Figma</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="fxsesh-challenges" aria-labelledby="fxsesh-challenges-heading">
+            <h3 class="fxsesh-challenges-heading" id="fxsesh-challenges-heading">Core challenges &amp; trade-offs</h3>
+            <p class="fxsesh-challenges-intro">Shipping FX Sesh meant choosing under real limits: cost, time, what the stack can do, and how the product should feel day to day. Each row below is the problem as it showed up, then what I gave up or kept instead.</p>
+            <div class="fxsesh-accordion">
+              <details class="fxsesh-details">
+                <summary>API cost vs feature depth</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>I wanted richer economic and market data (similar to “red folder” style news depth).</li>
+                    <li>Commercial APIs such as Financial Modeling Prep were too expensive to sustain at my stage.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Dropped deep paid economic data integration.</span>
+                    <span>Shipped a lightweight RSS-based news flow so users still get relevant updates without raising operating cost.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Testing vs development speed</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>Features shipped quickly while the product was still finding fit.</li>
+                    <li>Formal test coverage intentionally lagged during that burst of iteration.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Lower initial automated coverage in exchange for faster validation loops.</span>
+                    <span>Room to add structured tests and hardening once core flows stabilized.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Expo limitations vs development simplicity</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>Expo simplified builds and deployment.</li>
+                    <li>It also caps some native depth and certain advanced testing setups.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Less flexibility for edge-case native control and deepest test harnesses.</span>
+                    <span>Much faster iteration and a smoother pipeline for iOS and Android from one codebase.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Monetization vs user experience</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>AdMob supports a free tier but ads can erode focus if placement is heavy-handed.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Some risk of interruption in exchange for a free, accessible product with revenue potential.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Feature scope vs focus</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>Many directions were possible: journal, notifications, learn tab, news, widgets, and more.</li>
+                    <li>Risk of a bloated “everything app” without a clear anchor.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Accepted breadth only where it stayed tied to one trader workflow.</span>
+                    <span>Centralized complementary tools instead of shipping unrelated feature silos.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Security (journal encryption) vs delivery priority</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>Journal data could eventually warrant stronger encryption.</li>
+                    <li>That work competes with time on core flows and stability.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Deferred advanced encryption to ship a stable, usable journal and session experience first.</span>
+                  </div>
+                </div>
+              </details>
+              <details class="fxsesh-details">
+                <summary>Real-time features vs technical complexity</summary>
+                <div class="fxsesh-details-body">
+                  <h4>Challenge</h4>
+                  <ul>
+                    <li>Reliable session alerts depend on push infrastructure and backend behavior.</li>
+                    <li>That stack adds moving parts and failure modes.</li>
+                  </ul>
+                  <h4>Trade-off</h4>
+                  <div class="fxsesh-details-trade">
+                    <span>Higher implementation and ops complexity.</span>
+                    <span>High value for traders who depend on timely session awareness.</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <div class="outcome-section">
+            <h3 class="detail-card-title">Outcome</h3>
+            <ul>
+              <li>FX Sesh in beta testing on the App Store and Google Play, with a companion website for discovery and support.</li>
+              <li>Built with Expo/React Native (iOS + Android from one codebase) and a static marketing site for fast, reliable presence.</li>
+              <li>Freemium model: ad-supported free tier in beta; premium subscription features (journal, widget, pre-alerts, overlap notifications) in beta.</li>
+            </ul>
+          </div>
+
           <div class="case-study-bottom-links case-study-links">
             <a href="https://fxseshonline.github.io/home/" target="_blank" rel="noopener noreferrer">Visit website →</a>
             <a href="https://play.google.com/store/apps/details?id=com.forexsesh.app" target="_blank" rel="noopener noreferrer">Android (beta)</a>
@@ -989,7 +1322,7 @@
                 <li>Header contact bar (phone, email) with subtle background</li>
                 <li>Main nav with logo, hamburger on small screens, and clear Practice Areas / Attorneys / Contact links</li>
                 <li>Page hero with serif headline for trust and readability</li>
-                <li>Practice Areas: filter buttons (All, Civil & Commercial, Arbitration, etc.) and card grid</li>
+                <li>Practice Areas: filter buttons (All, Civil &amp; Commercial, Arbitration, etc.) and card grid</li>
                 <li>Attorneys: profile cards with photo, name, title, bio preview, and “Learn More”</li>
                 <li>Footer with logo, contact details, and office hours</li>
               </ul>
@@ -1007,16 +1340,13 @@
           <div class="case-study-footer">
             <div class="case-study-screens" id="gspco-screens">
               <div class="screen-slot" data-title="Home" data-explanation="Landing view with hero headline and clear path to practice areas, attorneys, and contact. Navy and gold establish a professional, trustworthy tone.">
-                <img src="assets/ui-ux/gspco-screens/Home.png" alt="GSPCO home page" loading="lazy">
+                <img src="assets/ui-ux/gspco-screens/Home.png" alt="GSPCO home page" width="1280" height="2418" loading="eager" decoding="async">
               </div>
-              <div class="screen-slot" data-title="Practice Areas" data-explanation="Filterable grid of practice areas (Civil & Commercial, Arbitration, Telecommunications, etc.) so visitors can quickly find relevant expertise.">
-                <img src="assets/ui-ux/gspco-screens/Practice-Areas.png" alt="GSPCO practice areas" loading="lazy">
+              <div class="screen-slot" data-title="Practice Areas" data-explanation="Filterable grid of practice areas (Civil &amp; Commercial, Arbitration, Telecommunications, etc.) so visitors can quickly find relevant expertise.">
+                <img src="assets/ui-ux/gspco-screens/Practice-Areas.png" alt="GSPCO practice areas" width="1280" height="5596" loading="eager" decoding="async">
               </div>
               <div class="screen-slot" data-title="Attorneys" data-explanation="Attorney cards with photo, name, title, and bio preview. Each card links to a full profile for credibility and contact.">
-                <img src="assets/ui-ux/gspco-screens/Attorneys.png" alt="GSPCO attorneys page" loading="lazy">
-              </div>
-              <div class="screen-slot" data-title="Responsive" data-explanation="Mobile layout with hamburger nav and stacked content so the site works well on phones and tablets.">
-                <img src="assets/ui-ux/gspco-screens/Responsive.png" alt="GSPCO responsive view" loading="lazy">
+                <img src="assets/ui-ux/gspco-screens/Attorneys.png" alt="GSPCO attorneys page" width="1280" height="2262" loading="eager" decoding="async">
               </div>
             </div>
           </div>

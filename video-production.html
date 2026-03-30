@@ -222,10 +222,29 @@
       .vp-social-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* HD Videos: heading stays in reading width; carousel breaks out wider */
+    .vp-section-hd {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .vp-section-hd-head {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .vp-section-hd-head h2 { margin-bottom: 2rem; }
+    .vp-hd-carousel-bleed {
+      width: 100%;
+      max-width: min(96vw, 90rem);
+      margin: 0 auto;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
     .vp-hd-carousel-wrap {
       position: relative;
-      margin: 0 -2rem;
-      padding: 0 3rem;
+      margin: 0;
+      padding: 0 clamp(2.5rem, 5vw, 4rem);
     }
     .vp-hd-carousel {
       display: flex;
@@ -240,7 +259,7 @@
     .vp-hd-carousel::-webkit-scrollbar-track { background: var(--border); border-radius: 4px; }
     .vp-hd-carousel::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
     .vp-hd-slide {
-      flex: 0 0 min(320px, 85vw);
+      flex: 0 0 min(480px, 90vw);
       scroll-snap-align: start;
     }
     .vp-hd-slide a {
@@ -267,8 +286,8 @@
     }
     .vp-hd-slide a:hover .vp-hd-play-overlay { opacity: 1; }
     .vp-hd-slide .vp-hd-play-icon {
-      width: 64px;
-      height: 64px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: rgba(255,255,255,0.95);
       color: #000;
@@ -351,9 +370,12 @@
       </div>
     </section>
 
-    <section class="vp-section">
-      <h2>HD Videos</h2>
-      <p class="vp-section-tagline">Focused on pacing, transitions, and storytelling to capture attention quickly and maintain viewer interest.</p>
+    <section class="vp-section vp-section-hd">
+      <div class="vp-section-hd-head">
+        <h2>HD Videos</h2>
+        <p class="vp-section-tagline">Focused on pacing, transitions, and storytelling to capture attention quickly and maintain viewer interest.</p>
+      </div>
+      <div class="vp-hd-carousel-bleed">
       <div class="vp-hd-carousel-wrap">
         <button type="button" class="vp-hd-carousel-nav prev" id="hdCarouselPrev" aria-label="Previous">‹</button>
         <div class="vp-hd-carousel" id="hdCarousel">
@@ -403,16 +425,6 @@
         </div>
         <button type="button" class="vp-hd-carousel-nav next" id="hdCarouselNext" aria-label="Next">›</button>
       </div>
-    </section>
-
-    <section class="vp-section">
-      <h2>My First Release</h2>
-      <div class="vp-project">
-        <a href="https://www.youtube.com/watch?v=v9ZnEwS883A" target="_blank" rel="noopener" class="vp-video-thumb" style="margin-bottom: 1.5rem;">
-          <img src="https://img.youtube.com/vi/v9ZnEwS883A/maxresdefault.jpg" alt="My First Release" onerror="this.src='https://img.youtube.com/vi/v9ZnEwS883A/hqdefault.jpg'">
-          <span class="vp-video-play-overlay"><span class="vp-video-play-icon"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
-        </a>
-        <p>This project took my team a month to complete. Most of the time was spent gathering footage. We collaborated with young talented individuals in Kingston of various fields and disciplines. It was fun spending time with my fellow youth observing what it takes for them to pursue their passions. The aim of this project is to inspire the viewer to become active. To go out and live their days to the fullest. To live without fear while pursuing their dreams.</p>
       </div>
     </section>
 
@@ -435,7 +447,7 @@
       var carousel = document.getElementById('hdCarousel');
       var prev = document.getElementById('hdCarouselPrev');
       var next = document.getElementById('hdCarouselNext');
-      var slideWidth = 320 + 16;
+      var slideWidth = 480 + 16;
       prev.addEventListener('click', function() {
         carousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
       });
