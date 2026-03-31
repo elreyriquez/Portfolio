@@ -318,6 +318,12 @@
       border-color: rgba(255,255,255,0.4);
       color: #fff;
     }
+    .clutter-modes svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      display: block;
+    }
     @media (max-width: 1000px) {
       .clutter-item { filter: saturate(0.6); }
       .clutter-header { max-width: min(20rem, 90vw); }
@@ -813,16 +819,16 @@
       <div class="clutter-item" id="cc-lighter"><img src="assets/clutter/lighter.png" alt=""></div>
       <div class="clutter-item" id="cc-cursor"><img src="assets/clutter/cursor.png" alt=""></div>
 
-      <!-- Mode switcher -->
+      <!-- Mode switcher (inline SVGs so icons always render; no Ion web components) -->
       <div class="clutter-modes">
-        <button class="active" data-mode="chaos" aria-label="Chaos layout">
-          <ion-icon name="flash-outline"></ion-icon>
+        <button type="button" class="active" data-mode="chaos" aria-label="Chaos: scattered layout" title="Chaos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </button>
-        <button data-mode="cleanup" aria-label="Cleanup layout">
-          <ion-icon name="grid-outline"></ion-icon>
+        <button type="button" data-mode="cleanup" aria-label="Cleanup: aligned grid layout" title="Cleanup">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         </button>
-        <button data-mode="notebook" aria-label="Notebook layout">
-          <ion-icon name="book-outline"></ion-icon>
+        <button type="button" data-mode="notebook" aria-label="Notebook: stacked layout" title="Notebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8M8 11h6"/></svg>
         </button>
       </div>
     </section>
@@ -1014,10 +1020,6 @@
   <!-- GSAP + Flip for Creative Clutter hero -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
-  <script type="module">
-    import ionicons from 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js';
-  </script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script>
     /* ── Creative Clutter hero — adapted from Codegrid ── */
     document.addEventListener('DOMContentLoaded', function () {
