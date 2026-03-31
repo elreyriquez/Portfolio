@@ -272,14 +272,36 @@
       margin: 0 auto;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
-    /* Notebook layout: white copy on solid black panel for legibility */
+    /* Notebook layout: white copy; black panel is ::before so it can fade in alone */
     .intro-section.clutter-mode-notebook .clutter-header {
-      background: #000;
       padding: 1rem 1.35rem;
       border-radius: 0.45rem;
       box-sizing: border-box;
+      background: transparent;
+    }
+    .intro-section.clutter-mode-notebook .clutter-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #000;
+      z-index: 0;
+      opacity: 0;
+      animation: clutter-notebook-panel-in 1.05s ease-out forwards;
+    }
+    @keyframes clutter-notebook-panel-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-section.clutter-mode-notebook .clutter-header::before {
+        animation: none;
+        opacity: 1;
+      }
     }
     .intro-section.clutter-mode-notebook .clutter-header .intro {
+      position: relative;
+      z-index: 1;
       color: rgba(255, 255, 255, 0.96);
       text-shadow: none;
     }
@@ -1139,33 +1161,20 @@
 
       function switchMode(mode) {
         if (mode === activeMode) return;
-        var tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
-        tl.to(flipTargets, {
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.in',
+        var state = Flip.getState(flipTargets);
+        if (mode === 'notebook') {
+          desk.classList.add('clutter-mode-notebook');
+        } else {
+          desk.classList.remove('clutter-mode-notebook');
+        }
+        setLayout(mode);
+        Flip.from(state, {
+          duration: 1.25,
+          ease: 'power3.inOut',
+          stagger: { amount: 0.1, from: 'center' },
+          absolute: true,
         });
-        tl.add(function () {
-          var state = Flip.getState(flipTargets);
-          if (mode === 'notebook') {
-            desk.classList.add('clutter-mode-notebook');
-          } else {
-            desk.classList.remove('clutter-mode-notebook');
-          }
-          setLayout(mode);
-          activeMode = mode;
-          return Flip.from(state, {
-            duration: 1.25,
-            ease: 'power3.inOut',
-            stagger: { amount: 0.1, from: 'center' },
-            absolute: true,
-          });
-        });
-        tl.to(flipTargets, {
-          opacity: 1,
-          duration: 1.35,
-          ease: 'power2.out',
-        });
+        activeMode = mode;
       }
 
       setLayout('chaos');
