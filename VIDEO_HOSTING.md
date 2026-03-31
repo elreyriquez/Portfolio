@@ -35,7 +35,7 @@ src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
 
 ## Page Structure
 
-The video-production page has these sections (matching your Wix layout):
+The motion design page has these sections (matching your Wix layout):
 
 - **Devoted to Motion**: hero headline
 - **Social Media**: 3×6 grid of vertical (9:16) video previews

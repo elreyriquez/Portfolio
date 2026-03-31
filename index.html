@@ -209,6 +209,7 @@
       background: var(--intro-bg);
       color: var(--intro-text);
       overflow: hidden;
+      /* clutter items are absolute children — ensure this is the containing block */
     }
     .intro-section .intro-bg-video {
       position: absolute;
@@ -247,10 +248,74 @@
     }
     .intro-section .intro {
       color: rgba(255, 255, 255, 0.95);
-      max-width: 44rem;
-      margin: 0 auto;
       line-height: 1.5;
-      animation: intro-slide-in 1s ease-out 1.8s both;
+      /* animation handled by GSAP; no CSS animation needed */
+    }
+
+    /* ── Creative Clutter hero ── */
+    .clutter-header {
+      position: absolute;
+      width: clamp(260px, 36vw, 500px);
+      text-align: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .clutter-header .intro {
+      font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+      font-weight: 600;
+      max-width: none;
+      margin: 0;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .clutter-item {
+      position: absolute;
+      will-change: transform;
+      z-index: 2;
+    }
+    .clutter-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .clutter-modes {
+      position: absolute;
+      bottom: 5svh;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    .clutter-modes button {
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 300ms ease;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .clutter-modes button:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+    .clutter-modes button:active { transform: scale(0.92); }
+    .clutter-modes button.active {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.4);
+      color: #fff;
+    }
+    @media (max-width: 1000px) {
+      .clutter-item { filter: saturate(0.6); }
+      .clutter-header .intro { font-size: clamp(1rem, 4vw, 1.4rem); }
     }
     @keyframes intro-slide-in {
       from {
@@ -723,8 +788,36 @@
         <source src="assets/landing/day-intro-bg.mp4" type="video/mp4">
       </video>
       <div class="intro-bg-overlay"></div>
-      <div class="section-inner">
+
+      <!-- Clutter copy — positioned by GSAP -->
+      <div class="clutter-header">
         <p class="intro">Experienced visual designer creating systems that help teams communicate efficiently and effectively through scalable brand strategy.</p>
+      </div>
+
+      <!-- Clutter items -->
+      <div class="clutter-item" id="cc-music"><img src="assets/clutter/music.png" alt=""></div>
+      <div class="clutter-item" id="cc-cd"><img src="assets/clutter/cd.png" alt=""></div>
+      <div class="clutter-item" id="cc-dialog"><img src="assets/clutter/dialog.png" alt=""></div>
+      <div class="clutter-item" id="cc-folder"><img src="assets/clutter/folder.png" alt=""></div>
+      <div class="clutter-item" id="cc-macmini"><img src="assets/clutter/macmini.png" alt=""></div>
+      <div class="clutter-item" id="cc-paper"><img src="assets/clutter/paper.png" alt=""></div>
+      <div class="clutter-item" id="cc-passport"><img src="assets/clutter/passport.png" alt=""></div>
+      <div class="clutter-item" id="cc-portrait"><img src="assets/clutter/portrait.png" alt=""></div>
+      <div class="clutter-item" id="cc-appicon"><img src="assets/clutter/appicon.png" alt=""></div>
+      <div class="clutter-item" id="cc-lighter"><img src="assets/clutter/lighter.png" alt=""></div>
+      <div class="clutter-item" id="cc-cursor"><img src="assets/clutter/cursor.png" alt=""></div>
+
+      <!-- Mode switcher -->
+      <div class="clutter-modes">
+        <button class="active" data-mode="chaos" aria-label="Chaos layout">
+          <ion-icon name="flash-outline"></ion-icon>
+        </button>
+        <button data-mode="cleanup" aria-label="Cleanup layout">
+          <ion-icon name="grid-outline"></ion-icon>
+        </button>
+        <button data-mode="notebook" aria-label="Notebook layout">
+          <ion-icon name="book-outline"></ion-icon>
+        </button>
       </div>
     </section>
 
@@ -912,6 +1005,145 @@
   </main>
   <script src="js/theme.js"></script>
   <script src="js/home-effects.js"></script>
+  <!-- GSAP + Flip for Creative Clutter hero -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script type="module">
+    import ionicons from 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js';
+  </script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    /* ── Creative Clutter hero — adapted from Codegrid ── */
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof gsap === 'undefined' || typeof Flip === 'undefined') return;
+      gsap.registerPlugin(Flip);
+
+      var desk    = document.querySelector('.intro-section');
+      var header  = document.querySelector('.clutter-header');
+      var items   = gsap.utils.toArray('.clutter-item');
+      var flipTargets = [header].concat(items);
+      var switches = document.querySelectorAll('.clutter-modes button');
+      var activeMode = 'chaos';
+
+      var itemSizes = {
+        'cc-music':   325,
+        'cc-appicon': 100,
+        'cc-cd':      400,
+        'cc-cursor':  125,
+        'cc-dialog':  300,
+        'cc-folder':  150,
+        'cc-lighter': 225,
+        'cc-macmini': 250,
+        'cc-paper':   375,
+        'cc-passport':250,
+        'cc-portrait':375,
+      };
+
+      var arrangements = {
+        chaos: {
+          header: { x: 50, y: 47.5, center: true },
+          items: [
+            { id: 'cc-music',   x: -2.5, y: -2.5, rotation: -15 },
+            { id: 'cc-appicon', x:  20,  y:  15,  rotation:   5 },
+            { id: 'cc-cd',      x:  72.5,y:   5,  rotation:   0 },
+            { id: 'cc-cursor',  x:  72.5,y:  75,  rotation:   0 },
+            { id: 'cc-dialog',  x:  80,  y:  60,  rotation:  15 },
+            { id: 'cc-folder',  x:  90,  y:  50,  rotation:   5 },
+            { id: 'cc-lighter', x:   2.5,y:  45,  rotation: -10 },
+            { id: 'cc-macmini', x:   9.5,y:  55,  rotation:  15 },
+            { id: 'cc-paper',   x:   5,  y:  15,  rotation:  10 },
+            { id: 'cc-passport',x:  -2.5,y:  65,  rotation: -35 },
+            { id: 'cc-portrait',x:  65,  y:  20,  rotation:  -5 },
+          ],
+        },
+        cleanup: {
+          header: { x: 70, y: 37.5, center: false },
+          items: [
+            { id: 'cc-music',   x:  76.5, y:  -5,   rotation: 0 },
+            { id: 'cc-appicon', x:  64.5, y:   6,   rotation: 0 },
+            { id: 'cc-cd',      x:   0,   y:  47.5, rotation: 0 },
+            { id: 'cc-cursor',  x:  63.5, y:  23,   rotation: 0 },
+            { id: 'cc-dialog',  x:  34.5, y:  59,   rotation: 0 },
+            { id: 'cc-folder',  x:  24.5, y:  33,   rotation: 0 },
+            { id: 'cc-lighter', x:  -6,   y:   3.5, rotation: 0 },
+            { id: 'cc-macmini', x:  82.5, y:  66,   rotation: 0 },
+            { id: 'cc-paper',   x:   9,   y:  -3.5, rotation: 0 },
+            { id: 'cc-passport',x:  60,   y:  65.5, rotation: 0 },
+            { id: 'cc-portrait',x:  36.5, y:   5.5, rotation: 0 },
+          ],
+        },
+        notebook: {
+          header: { x: 50, y: 47.5, center: true },
+          items: [
+            { id: 'cc-music',   x:  45,   y:   0.5, rotation:  20 },
+            { id: 'cc-appicon', x:  65,   y:  70,   rotation:  25 },
+            { id: 'cc-cd',      x:  27.5, y:  15,   rotation:  10 },
+            { id: 'cc-cursor',  x:  75,   y:  35,   rotation:   0 },
+            { id: 'cc-dialog',  x:  30,   y:  57.5, rotation:  10 },
+            { id: 'cc-folder',  x:  25,   y:  40,   rotation:  10 },
+            { id: 'cc-lighter', x:  30,   y:   7.5, rotation:  30 },
+            { id: 'cc-macmini', x:  50,   y:  50,   rotation:  -5 },
+            { id: 'cc-paper',   x:  10,   y:  10,   rotation: -30 },
+            { id: 'cc-passport',x:  16.5, y:  50,   rotation: -20 },
+            { id: 'cc-portrait',x:  57.5, y:  20,   rotation:  10 },
+          ],
+        },
+      };
+
+      function setLayout(mode) {
+        var deskW  = desk.offsetWidth;
+        var deskH  = desk.offsetHeight;
+        var layout = arrangements[mode];
+        var mobile = deskW < 1000;
+
+        var offsetX = (mobile || layout.header.center) ? header.offsetWidth  / 2 : 0;
+        var offsetY = (mobile || layout.header.center) ? header.offsetHeight / 2 : 0;
+        var hx = mobile ? 50 : layout.header.x;
+        var hy = mobile ? 47.5 : layout.header.y;
+
+        gsap.set(header, {
+          x: (hx / 100) * deskW - offsetX,
+          y: (hy / 100) * deskH - offsetY,
+          rotation: 0,
+        });
+
+        layout.items.forEach(function (item) {
+          gsap.set('#' + item.id, {
+            x: (item.x / 100) * deskW,
+            y: (item.y / 100) * deskH,
+            width:    itemSizes[item.id],
+            height:   itemSizes[item.id],
+            rotation: item.rotation,
+          });
+        });
+      }
+
+      function switchMode(mode) {
+        if (mode === activeMode) return;
+        var state = Flip.getState(flipTargets);
+        setLayout(mode);
+        Flip.from(state, {
+          duration: 1.25,
+          ease: 'power3.inOut',
+          stagger: { amount: 0.1, from: 'center' },
+          absolute: true,
+        });
+        activeMode = mode;
+      }
+
+      setLayout('chaos');
+
+      switches.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          switches.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          switchMode(btn.dataset.mode);
+        });
+      });
+
+      window.addEventListener('resize', function () { setLayout(activeMode); });
+    });
+  </script>
   <script>
     (function() {
       var overlay = document.getElementById('landingOverlay');
