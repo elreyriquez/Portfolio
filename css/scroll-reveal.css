@@ -1,0 +1,202 @@
+/* Scroll-triggered fade + rise. JS adds .is-revealed when elements enter the viewport. */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FX Sesh: slide in from the sides (overrides default translateY) */
+.scroll-reveal.scroll-reveal--from-right {
+  transform: translateX(1.75rem);
+}
+
+.scroll-reveal.scroll-reveal--from-right.is-revealed {
+  transform: translateX(0);
+}
+
+.scroll-reveal.scroll-reveal--from-left {
+  transform: translateX(-1.75rem);
+}
+
+.scroll-reveal.scroll-reveal--from-left.is-revealed {
+  transform: translateX(0);
+}
+
+/* FX Sesh full-bleed track: wider slide distance (viewport-based) */
+.fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-right {
+  transform: translateX(clamp(2rem, 12vw, 6.5rem));
+}
+
+.fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-right.is-revealed {
+  transform: translateX(0);
+}
+
+.fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-left {
+  transform: translateX(clamp(-2rem, -12vw, -6.5rem));
+}
+
+.fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-left.is-revealed {
+  transform: translateX(0);
+}
+
+/* AI page Core stack: left column / right column slide distance */
+.tool-grid .scroll-reveal.scroll-reveal--from-left {
+  transform: translateX(clamp(-1.5rem, -6vw, -3.5rem));
+}
+
+.tool-grid .scroll-reveal.scroll-reveal--from-left.is-revealed {
+  transform: translateX(0);
+}
+
+.tool-grid .scroll-reveal.scroll-reveal--from-right {
+  transform: translateX(clamp(1.5rem, 6vw, 3.5rem));
+}
+
+.tool-grid .scroll-reveal.scroll-reveal--from-right.is-revealed {
+  transform: translateX(0);
+}
+
+/* AI page Certificates: left / right columns (2×2 grid) */
+.cert-cards .scroll-reveal.scroll-reveal--from-left {
+  transform: translateX(clamp(-1.5rem, -6vw, -3.5rem));
+}
+
+.cert-cards .scroll-reveal.scroll-reveal--from-left.is-revealed {
+  transform: translateX(0);
+}
+
+.cert-cards .scroll-reveal.scroll-reveal--from-right {
+  transform: translateX(clamp(1.5rem, 6vw, 3.5rem));
+}
+
+.cert-cards .scroll-reveal.scroll-reveal--from-right.is-revealed {
+  transform: translateX(0);
+}
+
+/* Case study picker cards: keep hover / active lift after reveal */
+.case-study-card.scroll-reveal:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+.case-study-card.scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.case-study-card.scroll-reveal.is-revealed:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+}
+
+.case-study-card.scroll-reveal.is-revealed.is-active {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+  outline: 3px solid rgba(255, 255, 255, 0.35);
+  outline-offset: -3px;
+}
+
+.case-study-card.scroll-reveal {
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Staggered grids (optional, subtle) */
+.tool-grid .scroll-reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.tool-grid .scroll-reveal:nth-child(2) {
+  transition-delay: 45ms;
+}
+.tool-grid .scroll-reveal:nth-child(3) {
+  transition-delay: 90ms;
+}
+.tool-grid .scroll-reveal:nth-child(4) {
+  transition-delay: 135ms;
+}
+.tool-grid .scroll-reveal:nth-child(5) {
+  transition-delay: 180ms;
+}
+.tool-grid .scroll-reveal:nth-child(6) {
+  transition-delay: 225ms;
+}
+
+.subgrid .scroll-reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.subgrid .scroll-reveal:nth-child(2) {
+  transition-delay: 55ms;
+}
+.subgrid .scroll-reveal:nth-child(3) {
+  transition-delay: 110ms;
+}
+
+.cert-cards .scroll-reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.cert-cards .scroll-reveal:nth-child(2) {
+  transition-delay: 50ms;
+}
+.cert-cards .scroll-reveal:nth-child(3) {
+  transition-delay: 100ms;
+}
+.cert-cards .scroll-reveal:nth-child(4) {
+  transition-delay: 150ms;
+}
+
+.scripts-list .scroll-reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.scripts-list .scroll-reveal:nth-child(2) {
+  transition-delay: 45ms;
+}
+.scripts-list .scroll-reveal:nth-child(3) {
+  transition-delay: 90ms;
+}
+.scripts-list .scroll-reveal:nth-child(4) {
+  transition-delay: 135ms;
+}
+
+.case-study-cards .scroll-reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.case-study-cards .scroll-reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal.scroll-reveal--from-right,
+  .scroll-reveal.scroll-reveal--from-left,
+  .fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-right,
+  .fxsesh-reveal-bleed .scroll-reveal.scroll-reveal--from-left,
+  .case-study-card.scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms !important;
+  }
+
+  /* Keep subtle picker-card feedback without scroll animation */
+  .case-study-card.scroll-reveal.is-revealed:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  .case-study-card.scroll-reveal.is-revealed.is-active {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+    outline: 3px solid rgba(255, 255, 255, 0.35);
+    outline-offset: -3px;
+  }
+}

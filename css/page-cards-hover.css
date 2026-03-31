@@ -1,0 +1,169 @@
+/* Hover: slight scale + accent tint so the hovered card contrasts with siblings.
+   AI + UI/UX pages only. Transforms combine with scroll-reveal settled state. */
+
+.page-ai .tool-card,
+.page-ai .cert-card,
+.page-ai .subcard,
+.page-ai .workflow-wrap {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    border-style 0.35s ease;
+}
+
+.page-ai .tool-card.scroll-reveal.is-revealed:hover,
+.page-ai .cert-card.scroll-reveal.is-revealed:hover {
+  transform: translateX(0) scale(1.02);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .page-ai .tool-card.scroll-reveal.is-revealed:hover,
+[data-theme="dark"] .page-ai .cert-card.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+}
+
+.page-ai .subcard.scroll-reveal.is-revealed:hover {
+  transform: translateY(0) scale(1.02);
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .page-ai .subcard.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+.page-ai .workflow-wrap.scroll-reveal.is-revealed:hover {
+  transform: translateY(0) scale(1.015);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .page-ai .workflow-wrap.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+/* ── UI/UX page ── */
+
+.page-uiux .detail-card,
+.page-uiux .ux-visual-card,
+.page-uiux .ux-copy-card,
+.page-uiux .outcome-section,
+.page-uiux .fxsesh-tech-group,
+.page-uiux .website-block {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    border-top-color 0.35s ease;
+}
+
+.page-uiux .detail-card.scroll-reveal.is-revealed:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+}
+
+.page-uiux .detail-card.scroll-reveal:not(.scroll-reveal--from-left):not(.scroll-reveal--from-right).is-revealed:hover {
+  transform: translateY(0) scale(1.02);
+}
+
+.page-uiux .detail-card.scroll-reveal.scroll-reveal--from-left.is-revealed:hover,
+.page-uiux .detail-card.scroll-reveal.scroll-reveal--from-right.is-revealed:hover {
+  transform: translateX(0) scale(1.02);
+}
+
+[data-theme="dark"] .page-uiux .detail-card.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+}
+
+.page-uiux .ux-visual-card.scroll-reveal.is-revealed:hover,
+.page-uiux .ux-copy-card.scroll-reveal.is-revealed:hover {
+  transform: translateY(0) scale(1.02);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .page-uiux .ux-visual-card.scroll-reveal.is-revealed:hover,
+[data-theme="dark"] .page-uiux .ux-copy-card.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+}
+
+.page-uiux .outcome-section.scroll-reveal.is-revealed:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+}
+
+.page-uiux .outcome-section.scroll-reveal:not(.scroll-reveal--from-left):not(.scroll-reveal--from-right).is-revealed:hover {
+  transform: translateY(0) scale(1.02);
+}
+
+.page-uiux .outcome-section.scroll-reveal.scroll-reveal--from-left.is-revealed:hover,
+.page-uiux .outcome-section.scroll-reveal.scroll-reveal--from-right.is-revealed:hover {
+  transform: translateX(0) scale(1.02);
+}
+
+[data-theme="dark"] .page-uiux .outcome-section.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+}
+
+.page-uiux .fxsesh-tech-group.scroll-reveal.is-revealed:hover {
+  transform: translateY(0) scale(1.03);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 45%, var(--border)), 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .page-uiux .fxsesh-tech-group.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 50%, var(--border)), 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.page-uiux .website-block.scroll-reveal.is-revealed:hover {
+  transform: translateY(0) scale(1.01);
+  border-top-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .page-uiux .website-block.scroll-reveal.is-revealed:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Case study tiles: gradient cards — lift + accent ring */
+.page-uiux .case-study-card.scroll-reveal.is-revealed:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.24),
+    0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.page-uiux .case-study-card.scroll-reveal.is-revealed.is-active:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-ai .tool-card.scroll-reveal.is-revealed:hover,
+  .page-ai .cert-card.scroll-reveal.is-revealed:hover,
+  .page-ai .subcard.scroll-reveal.is-revealed:hover,
+  .page-ai .workflow-wrap.scroll-reveal.is-revealed:hover,
+  .page-uiux .detail-card.scroll-reveal.is-revealed:hover,
+  .page-uiux .ux-visual-card.scroll-reveal.is-revealed:hover,
+  .page-uiux .ux-copy-card.scroll-reveal.is-revealed:hover,
+  .page-uiux .outcome-section.scroll-reveal.is-revealed:hover,
+  .page-uiux .fxsesh-tech-group.scroll-reveal.is-revealed:hover,
+  .page-uiux .website-block.scroll-reveal.is-revealed:hover,
+  .page-uiux .case-study-card.scroll-reveal.is-revealed:hover,
+  .page-uiux .case-study-card.scroll-reveal.is-revealed.is-active:hover {
+    transform: none;
+  }
+}

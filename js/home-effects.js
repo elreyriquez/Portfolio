@@ -1,16 +1,23 @@
 /**
- * Home page only: inverted cursor follower.
- * Skips touch devices and prefers-reduced-motion.
+ * Inverted cursor follower (mix-blend-mode: difference).
+ * Active on home, AI Enthusiast, and UI/UX pages. Skips coarse pointers only.
  */
 (function () {
-  if (!document.body.classList.contains('page-home')) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function initCursorInvert() {
+  var body = document.body;
+  if (!body) return;
+  var pageOk =
+    body.classList.contains('page-home') ||
+    body.classList.contains('page-ai') ||
+    body.classList.contains('page-uiux');
+  if (!pageOk) return;
+  /* Do not disable on prefers-reduced-motion: the follower is not vestibular motion. */
   if (!window.matchMedia('(pointer: fine)').matches) return;
 
   var cursorEl = document.getElementById('cursorInvertFollower');
   if (!cursorEl) return;
 
-  document.documentElement.classList.add('home-cursor-fx');
+  document.documentElement.classList.add('cursor-invert-fx');
 
   var mx = window.innerWidth * 0.5;
   var my = window.innerHeight * 0.5;
@@ -43,14 +50,32 @@
     { passive: true }
   );
 
-  document.querySelectorAll('.skill-card, .work-preview-cell').forEach(function (el) {
-    el.addEventListener('mouseenter', function () {
-      targetScale = HOVER_SCALE;
+  document
+    .querySelectorAll(
+      [
+        '.skill-card',
+        '.work-preview-cell',
+        '.tool-card',
+        '.cert-card',
+        '.subcard',
+        '.workflow-wrap',
+        '.case-study-card',
+        '.detail-card',
+        '.ux-visual-card',
+        '.ux-copy-card',
+        '.outcome-section',
+        '.fxsesh-tech-group',
+        '.website-block',
+      ].join(',')
+    )
+    .forEach(function (el) {
+      el.addEventListener('mouseenter', function () {
+        targetScale = HOVER_SCALE;
+      });
+      el.addEventListener('mouseleave', function () {
+        targetScale = 1;
+      });
     });
-    el.addEventListener('mouseleave', function () {
-      targetScale = 1;
-    });
-  });
 
   rafId = requestAnimationFrame(tick);
 
@@ -62,4 +87,11 @@
       rafId = requestAnimationFrame(tick);
     }
   });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCursorInvert);
+  } else {
+    initCursorInvert();
+  }
 })();

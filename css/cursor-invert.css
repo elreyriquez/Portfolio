@@ -1,0 +1,37 @@
+/* Inverted cursor follower (fine pointer; see js/home-effects.js) */
+#cursorInvertFollower {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  background: #fff;
+  mix-blend-mode: difference;
+  transform: translate3d(-9999px, -9999px, 0);
+  will-change: transform;
+}
+
+@media (pointer: coarse) {
+  #cursorInvertFollower {
+    display: none !important;
+  }
+}
+
+html.cursor-invert-fx body.page-home,
+html.cursor-invert-fx body.page-ai,
+html.cursor-invert-fx body.page-uiux {
+  cursor: none;
+}
+
+html.cursor-invert-fx body.page-home a,
+html.cursor-invert-fx body.page-home button,
+html.cursor-invert-fx body.page-ai a,
+html.cursor-invert-fx body.page-ai button,
+html.cursor-invert-fx body.page-uiux a,
+html.cursor-invert-fx body.page-uiux button {
+  cursor: none;
+}
