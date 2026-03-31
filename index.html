@@ -272,6 +272,11 @@
       margin: 0 auto;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
+    /* Notebook layout: lighter clutter behind copy — use dark text for contrast */
+    .intro-section.clutter-mode-notebook .clutter-header .intro {
+      color: #0a0a0a;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.55), 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
     .clutter-item {
       position: absolute;
       will-change: transform;
@@ -1137,6 +1142,7 @@
           absolute: true,
         });
         activeMode = mode;
+        desk.classList.toggle('clutter-mode-notebook', mode === 'notebook');
       }
 
       setLayout('chaos');
