@@ -1180,6 +1180,31 @@
 
       setLayout('chaos');
 
+      /* ── Entrance animation: items slide in from nearest edge after 1.5s ── */
+      (function () {
+        var deskW = desk.offsetWidth;
+        var mid   = deskW / 2;
+
+        gsap.set(header, { opacity: 0 });
+
+        items.forEach(function (item) {
+          var x        = gsap.getProperty(item, 'x');
+          var fromLeft = x < mid;
+          var offscreen = fromLeft ? -(deskW * 0.7) : (deskW * 0.7);
+
+          gsap.set(item, { x: x + offscreen, opacity: 0 });
+          gsap.to(item, {
+            x:        x,
+            opacity:  1,
+            duration: 1.1,
+            ease:     'power3.out',
+            delay:    1.5 + Math.random() * 0.25,
+          });
+        });
+
+        gsap.to(header, { opacity: 1, duration: 0.9, ease: 'power2.out', delay: 1.9 });
+      })();
+
       switches.forEach(function (btn) {
         btn.addEventListener('click', function () {
           switches.forEach(function (b) { b.classList.remove('active'); });
