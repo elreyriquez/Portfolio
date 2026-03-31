@@ -209,7 +209,11 @@
       background: var(--intro-bg);
       color: var(--intro-text);
       overflow: hidden;
-      /* clutter items are absolute children — ensure this is the containing block */
+      /* Hero uses absolute clutter + GSAP: no page-section padding (was adding dead top space) */
+      padding: 0 1.25rem;
+      min-height: 100svh;
+      min-height: 100dvh;
+      justify-content: flex-start;
     }
     .intro-section .intro-bg-video {
       position: absolute;
@@ -255,16 +259,17 @@
     /* ── Creative Clutter hero ── */
     .clutter-header {
       position: absolute;
-      width: clamp(260px, 36vw, 500px);
+      max-width: min(22rem, 88vw);
+      width: 100%;
       text-align: center;
       z-index: 5;
       pointer-events: none;
     }
     .clutter-header .intro {
-      font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+      font-size: clamp(1.05rem, 1.85vw, 1.45rem);
       font-weight: 600;
-      max-width: none;
-      margin: 0;
+      max-width: 100%;
+      margin: 0 auto;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
     .clutter-item {
@@ -315,7 +320,8 @@
     }
     @media (max-width: 1000px) {
       .clutter-item { filter: saturate(0.6); }
-      .clutter-header .intro { font-size: clamp(1rem, 4vw, 1.4rem); }
+      .clutter-header { max-width: min(20rem, 90vw); }
+      .clutter-header .intro { font-size: clamp(0.98rem, 3.6vw, 1.25rem); }
     }
     @keyframes intro-slide-in {
       from {
@@ -1041,7 +1047,7 @@
 
       var arrangements = {
         chaos: {
-          header: { x: 50, y: 47.5, center: true },
+          header: { x: 50, y: 44, center: true },
           items: [
             { id: 'cc-music',   x: -2.5, y: -2.5, rotation: -15 },
             { id: 'cc-appicon', x:  20,  y:  15,  rotation:   5 },
@@ -1073,7 +1079,7 @@
           ],
         },
         notebook: {
-          header: { x: 50, y: 47.5, center: true },
+          header: { x: 50, y: 44, center: true },
           items: [
             { id: 'cc-music',   x:  45,   y:   0.5, rotation:  20 },
             { id: 'cc-appicon', x:  65,   y:  70,   rotation:  25 },
@@ -1099,7 +1105,7 @@
         var offsetX = (mobile || layout.header.center) ? header.offsetWidth  / 2 : 0;
         var offsetY = (mobile || layout.header.center) ? header.offsetHeight / 2 : 0;
         var hx = mobile ? 50 : layout.header.x;
-        var hy = mobile ? 47.5 : layout.header.y;
+        var hy = mobile ? 44 : layout.header.y;
 
         gsap.set(header, {
           x: (hx / 100) * deskW - offsetX,
