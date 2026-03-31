@@ -272,14 +272,16 @@
       margin: 0 auto;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
-    /* Notebook layout: white copy; black panel is ::before so it can fade in alone */
-    .intro-section.clutter-mode-notebook .clutter-header {
+    /* Notebook + Cleanup layouts: white copy on fading black panel */
+    .intro-section.clutter-mode-notebook .clutter-header,
+    .intro-section.clutter-mode-cleanup .clutter-header {
       padding: 1rem 1.35rem;
       border-radius: 0.45rem;
       box-sizing: border-box;
       background: transparent;
     }
-    .intro-section.clutter-mode-notebook .clutter-header::before {
+    .intro-section.clutter-mode-notebook .clutter-header::before,
+    .intro-section.clutter-mode-cleanup .clutter-header::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -287,19 +289,21 @@
       background: #000;
       z-index: 0;
       opacity: 0;
-      animation: clutter-notebook-panel-in 1.05s ease-out forwards;
+      animation: clutter-panel-in 1.05s ease-out forwards;
     }
-    @keyframes clutter-notebook-panel-in {
+    @keyframes clutter-panel-in {
       from { opacity: 0; }
       to { opacity: 1; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .intro-section.clutter-mode-notebook .clutter-header::before {
+      .intro-section.clutter-mode-notebook .clutter-header::before,
+      .intro-section.clutter-mode-cleanup .clutter-header::before {
         animation: none;
         opacity: 1;
       }
     }
-    .intro-section.clutter-mode-notebook .clutter-header .intro {
+    .intro-section.clutter-mode-notebook .clutter-header .intro,
+    .intro-section.clutter-mode-cleanup .clutter-header .intro {
       position: relative;
       z-index: 1;
       color: rgba(255, 255, 255, 0.96);
@@ -1162,11 +1166,8 @@
       function switchMode(mode) {
         if (mode === activeMode) return;
         var state = Flip.getState(flipTargets);
-        if (mode === 'notebook') {
-          desk.classList.add('clutter-mode-notebook');
-        } else {
-          desk.classList.remove('clutter-mode-notebook');
-        }
+        desk.classList.toggle('clutter-mode-notebook', mode === 'notebook');
+        desk.classList.toggle('clutter-mode-cleanup',  mode === 'cleanup');
         setLayout(mode);
         Flip.from(state, {
           duration: 1.25,
