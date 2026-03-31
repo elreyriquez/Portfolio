@@ -272,9 +272,15 @@
       margin: 0 auto;
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
-    /* Notebook layout: red copy — no drop shadow (cleaner on this layout) */
+    /* Notebook layout: white copy on solid black panel for legibility */
+    .intro-section.clutter-mode-notebook .clutter-header {
+      background: #000;
+      padding: 1rem 1.35rem;
+      border-radius: 0.45rem;
+      box-sizing: border-box;
+    }
     .intro-section.clutter-mode-notebook .clutter-header .intro {
-      color: #e8222f;
+      color: rgba(255, 255, 255, 0.96);
       text-shadow: none;
     }
     .clutter-item {
@@ -1134,6 +1140,11 @@
       function switchMode(mode) {
         if (mode === activeMode) return;
         var state = Flip.getState(flipTargets);
+        if (mode === 'notebook') {
+          desk.classList.add('clutter-mode-notebook');
+        } else {
+          desk.classList.remove('clutter-mode-notebook');
+        }
         setLayout(mode);
         Flip.from(state, {
           duration: 1.25,
@@ -1142,7 +1153,6 @@
           absolute: true,
         });
         activeMode = mode;
-        desk.classList.toggle('clutter-mode-notebook', mode === 'notebook');
       }
 
       setLayout('chaos');
