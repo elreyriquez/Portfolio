@@ -37,11 +37,24 @@
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/scroll-reveal.css">
   <link rel="stylesheet" href="css/page-cards-hover.css">
-  <link rel="stylesheet" href="css/cursor-invert.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600&family=Syne:wght@500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    /* ── Inverted cursor follower ── */
+    #cursorInvertFollower {
+      position: fixed; left: 0; top: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100000;
+      background: #fff;
+      mix-blend-mode: difference;
+      transform: translate3d(-9999px,-9999px,0);
+      will-change: transform;
+    }
+    @media (pointer: coarse) { #cursorInvertFollower { display: none !important; } }
+
     * { box-sizing: border-box; }
     body { margin: 0; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     /* Horizontal clip on main only so fixed cursor + mix-blend-mode are not broken on body */
@@ -1532,7 +1545,35 @@
 
   <script src="js/theme.js"></script>
   <script src="js/scroll-reveal.js"></script>
-  <script src="js/home-effects.js"></script>
+  <script>
+    /* Inverted cursor follower — inline so no external-file dependency */
+    (function () {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      var el = document.getElementById('cursorInvertFollower');
+      if (!el) return;
+      document.documentElement.classList.add('cursor-invert-fx');
+      document.body.style.cursor = 'none';
+      var mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
+      var ts = 1, cs = 1;
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function tick() {
+        cx = lerp(cx, mx, 0.14); cy = lerp(cy, my, 0.14); cs = lerp(cs, ts, 0.18);
+        el.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0) translate(-50%,-50%) scale(' + cs + ')';
+        requestAnimationFrame(tick);
+      }
+      document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; }, {passive:true});
+      document.querySelectorAll('a,button').forEach(function(n){
+        n.style.cursor = 'none';
+        n.addEventListener('mouseenter', function(){ ts = 1.5; });
+        n.addEventListener('mouseleave', function(){ ts = 1; });
+      });
+      document.querySelectorAll('.case-study-card,.detail-card,.ux-visual-card,.ux-copy-card,.outcome-section,.fxsesh-tech-group,.website-block').forEach(function(n){
+        n.addEventListener('mouseenter', function(){ ts = 1.5; });
+        n.addEventListener('mouseleave', function(){ ts = 1; });
+      });
+      tick();
+    })();
+  </script>
   <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
   <script>
     (function () {
