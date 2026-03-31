@@ -1139,20 +1139,33 @@
 
       function switchMode(mode) {
         if (mode === activeMode) return;
-        var state = Flip.getState(flipTargets);
-        if (mode === 'notebook') {
-          desk.classList.add('clutter-mode-notebook');
-        } else {
-          desk.classList.remove('clutter-mode-notebook');
-        }
-        setLayout(mode);
-        Flip.from(state, {
-          duration: 1.25,
-          ease: 'power3.inOut',
-          stagger: { amount: 0.1, from: 'center' },
-          absolute: true,
+        var tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
+        tl.to(flipTargets, {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in',
         });
-        activeMode = mode;
+        tl.add(function () {
+          var state = Flip.getState(flipTargets);
+          if (mode === 'notebook') {
+            desk.classList.add('clutter-mode-notebook');
+          } else {
+            desk.classList.remove('clutter-mode-notebook');
+          }
+          setLayout(mode);
+          activeMode = mode;
+          return Flip.from(state, {
+            duration: 1.25,
+            ease: 'power3.inOut',
+            stagger: { amount: 0.1, from: 'center' },
+            absolute: true,
+          });
+        });
+        tl.to(flipTargets, {
+          opacity: 1,
+          duration: 1.35,
+          ease: 'power2.out',
+        });
       }
 
       setLayout('chaos');
