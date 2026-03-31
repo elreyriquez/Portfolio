@@ -162,13 +162,13 @@
       color: var(--bg);
     }
 
-    .gallery {
+    .masonry-gallery {
       padding: 0 2rem 4rem;
       columns: 320px;
       column-gap: 1.5rem;
     }
 
-    .gallery-item {
+    .masonry-item {
       break-inside: avoid;
       overflow: hidden;
       background: var(--surface);
@@ -177,15 +177,69 @@
       transition: opacity 0.3s;
     }
 
-    .gallery-item.hidden {
+    .masonry-item.hidden {
       display: none;
     }
 
-    .gallery-item img,
-    .gallery-item video {
+    .masonry-item img,
+    .masonry-item video {
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    /* ── Scatter gallery ── */
+    .gd-scatter {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      background: #141414;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .gd-scatter-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      width: 45%;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+      pointer-events: none;
+      will-change: opacity;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .gd-card {
+      position: absolute;
+      width: 220px;
+      height: 270px;
+      border-radius: 0.75rem;
+      border: 0.4rem solid #3a3a3a;
+      box-shadow: 8px 8px 20px rgba(0,0,0,0.45);
+      will-change: left, top, transform;
+      overflow: hidden;
+    }
+
+    .gd-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.4rem;
+    }
+
+    @media (max-width: 768px) {
+      .gd-scatter-heading { width: 85%; }
+      .gd-card { width: 140px; height: 175px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gd-scatter { display: none; }
     }
 
     .lightbox {
@@ -222,7 +276,7 @@
     }
 
     @media (max-width: 600px) {
-      .site-header, .graphic-design-intro, .filter-bar, .gallery {
+      .site-header, .graphic-design-intro, .filter-bar, .masonry-gallery {
         padding-left: 1rem;
         padding-right: 1rem;
       }
@@ -258,6 +312,11 @@
   </header>
 
   <p class="graphic-design-intro">Designed to balance visual impact with clarity and brand consistency across digital platforms.</p>
+
+  <section class="gd-scatter" id="gdScatter">
+    <h1 class="gd-scatter-heading" id="gdScatterHeading"></h1>
+  </section>
+
   <div class="filter-bar">
     <button class="filter-btn active" data-category="all">All</button>
     <button class="filter-btn" data-category="Corporate">Corporate</button>
@@ -268,95 +327,95 @@
     <button class="filter-btn" data-category="Motion">Motion</button>
   </div>
 
-  <div class="gallery" id="gallery">
-    <div class="gallery-item" data-category="Corporate">
+  <div class="masonry-gallery" id="gallery">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/Engineer-Day.jpg" alt="Engineer Day" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Corporate">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/General-Ad.jpg" alt="General Ad" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Corporate">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/We%27re-Hiring.jpg" alt="We're Hiring" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Corporate">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/Website-and-Apps.jpg" alt="Website and Apps" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Corporate">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/design-10-15338d_20f83192a3164d7d9e0f8b7384bef735~mv2_d_10800_21600_s_4.png" alt="Corporate design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Corporate">
+    <div class="masonry-item" data-category="Corporate">
       <img src="assets/graphic-design/Corporate/image-79959170-489d-41e7-9b2a-7249f615607e.png" alt="Corporate design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Food">
+    <div class="masonry-item" data-category="Food">
       <img src="assets/graphic-design/Food/Bay-Juices-New-Year.jpg" alt="Bay Juices New Year" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Food">
+    <div class="masonry-item" data-category="Food">
       <img src="assets/graphic-design/Food/Island%20Sol%20Product%20Duo%20Cofee%20and%20Chocolate.jpg" alt="Island Sol Product Duo" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Food">
+    <div class="masonry-item" data-category="Food">
       <img src="assets/graphic-design/Food/Social-Media---Orange.jpg" alt="Social Media Orange" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Food">
+    <div class="masonry-item" data-category="Food">
       <img src="assets/graphic-design/Food/Social-Media-Emancipation-Park.jpg" alt="Social Media Emancipation Park" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/AngelsvsDemons-01.jpg" alt="Angels vs Demons" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/Collette2orange-01.jpg" alt="Collette" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/Flashing%20Lights-01.jpg" alt="Flashing Lights" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/design-15-15338d_a011a2cbae1440d2a669e14ed3537681~mv2.jpg" alt="Illustration" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/design-21-15338d_c0bac4b180f64896ad7cafc56165627e~mv2.jpg" alt="Illustration" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Illustrations">
+    <div class="masonry-item" data-category="Illustrations">
       <img src="assets/graphic-design/Illustrations/leb2-01.jpg" alt="LEB" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Events">
+    <div class="masonry-item" data-category="Events">
       <img src="assets/graphic-design/Events/C1.jpg" alt="Event design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Events">
+    <div class="masonry-item" data-category="Events">
       <img src="assets/graphic-design/Events/c2.jpg" alt="Event design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Events">
+    <div class="masonry-item" data-category="Events">
       <img src="assets/graphic-design/Events/C3.jpg" alt="Event design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Events">
+    <div class="masonry-item" data-category="Events">
       <img src="assets/graphic-design/Events/Weekly-Calendar-IG-Post.jpg" alt="Weekly Calendar IG Post" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Events">
+    <div class="masonry-item" data-category="Events">
       <img src="assets/graphic-design/Events/design-17-15338d_a96f621b32c245e78c4840a4c34381c4~mv2.jpg" alt="Event design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Logos">
+    <div class="masonry-item" data-category="Logos">
       <img src="assets/graphic-design/Logos/Metallic%20SEC%20Logo.png" alt="Metallic SEC Logo" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Logos">
+    <div class="masonry-item" data-category="Logos">
       <img src="assets/graphic-design/Logos/design-10-15338d_6ee6e780b5fd46b99592c9b70c98709a~mv2_d_4000_2500_s_4_2.jpg" alt="Logo design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Logos">
+    <div class="masonry-item" data-category="Logos">
       <img src="assets/graphic-design/Logos/design-11-15338d_743e643de36146a0b2f5522d2b9d8480~mv2.jpg" alt="Logo design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Logos">
+    <div class="masonry-item" data-category="Logos">
       <img src="assets/graphic-design/Logos/design-25-15338d_f48ae0fc0c114d7682b912304f03ec8d~mv2.jpg" alt="Logo design" loading="lazy">
     </div>
-    <div class="gallery-item" data-category="Motion">
+    <div class="masonry-item" data-category="Motion">
       <video src="assets/graphic-design/Motion/Fire%20Wednesday.mp4" muted loop playsinline loading="lazy"></video>
     </div>
-    <div class="gallery-item" data-category="Motion">
+    <div class="masonry-item" data-category="Motion">
       <video src="assets/graphic-design/Motion/Izizzi%20Heroes%20Day.mp4" muted loop playsinline loading="lazy"></video>
     </div>
-    <div class="gallery-item" data-category="Motion">
+    <div class="masonry-item" data-category="Motion">
       <video src="assets/graphic-design/Motion/Red%20Stripe%20Booth.mp4" muted loop playsinline loading="lazy"></video>
     </div>
-    <div class="gallery-item" data-category="Motion">
+    <div class="masonry-item" data-category="Motion">
       <video src="assets/graphic-design/Motion/file.mp4" muted loop playsinline loading="lazy"></video>
     </div>
-    <div class="gallery-item" data-category="Motion">
+    <div class="masonry-item" data-category="Motion">
       <video src="assets/graphic-design/Motion/puncheon.mp4" muted loop playsinline loading="lazy"></video>
     </div>
   </div>
@@ -367,9 +426,12 @@
     <video id="lightboxVideo" muted loop playsinline controls style="display:none;max-width:100%;max-height:90vh;"></video>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
+    /* ── Existing gallery: filter + lightbox + video observer ── */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryItems = document.querySelectorAll('.masonry-item');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
@@ -422,12 +484,210 @@
         lightboxVideo.removeAttribute('src');
       }
     });
-    document.querySelectorAll('.gallery-item video').forEach(v => {
+    document.querySelectorAll('.masonry-item video').forEach(v => {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => { entry.target[entry.isIntersecting ? 'play' : 'pause'](); });
       }, { threshold: 0.25 });
       obs.observe(v);
     });
+
+    /* ── Scatter gallery (adapted from Codegrid poly-app) ── */
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const IMAGE_SETS = [
+        {
+          heading: '8 years crafting brands and visual identities',
+          images: [
+            'assets/graphic-design/Corporate/Engineer-Day.jpg',
+            'assets/graphic-design/Corporate/General-Ad.jpg',
+            'assets/graphic-design/Corporate/We%27re-Hiring.jpg',
+            'assets/graphic-design/Corporate/Website-and-Apps.jpg',
+            'assets/graphic-design/Corporate/image-79959170-489d-41e7-9b2a-7249f615607e.png',
+            'assets/graphic-design/Logos/Metallic%20SEC%20Logo.png',
+            'assets/graphic-design/Logos/design-10-15338d_6ee6e780b5fd46b99592c9b70c98709a~mv2_d_4000_2500_s_4_2.jpg',
+            'assets/graphic-design/Logos/design-11-15338d_743e643de36146a0b2f5522d2b9d8480~mv2.jpg',
+          ]
+        },
+        {
+          heading: 'Illustration and identity built concept to canvas',
+          images: [
+            'assets/graphic-design/Illustrations/AngelsvsDemons-01.jpg',
+            'assets/graphic-design/Illustrations/Collette2orange-01.jpg',
+            'assets/graphic-design/Illustrations/Flashing%20Lights-01.jpg',
+            'assets/graphic-design/Illustrations/design-15-15338d_a011a2cbae1440d2a669e14ed3537681~mv2.jpg',
+            'assets/graphic-design/Illustrations/design-21-15338d_c0bac4b180f64896ad7cafc56165627e~mv2.jpg',
+            'assets/graphic-design/Illustrations/leb2-01.jpg',
+            'assets/graphic-design/Logos/design-25-15338d_f48ae0fc0c114d7682b912304f03ec8d~mv2.jpg',
+            'assets/graphic-design/Corporate/design-10-15338d_20f83192a3164d7d9e0f8b7384bef735~mv2_d_10800_21600_s_4.png',
+          ]
+        },
+        {
+          heading: 'Event and social visuals designed to captivate',
+          images: [
+            'assets/graphic-design/Events/C1.jpg',
+            'assets/graphic-design/Events/c2.jpg',
+            'assets/graphic-design/Events/C3.jpg',
+            'assets/graphic-design/Events/Weekly-Calendar-IG-Post.jpg',
+            'assets/graphic-design/Events/design-17-15338d_a96f621b32c245e78c4840a4c34381c4~mv2.jpg',
+            'assets/graphic-design/Food/Bay-Juices-New-Year.jpg',
+            'assets/graphic-design/Food/Social-Media---Orange.jpg',
+            'assets/graphic-design/Food/Social-Media-Emancipation-Park.jpg',
+          ]
+        },
+        {
+          heading: 'Every piece crafted with intention and impact',
+          images: [
+            'assets/graphic-design/Food/Island%20Sol%20Product%20Duo%20Cofee%20and%20Chocolate.jpg',
+            'assets/graphic-design/Corporate/Engineer-Day.jpg',
+            'assets/graphic-design/Illustrations/AngelsvsDemons-01.jpg',
+            'assets/graphic-design/Events/C1.jpg',
+            'assets/graphic-design/Logos/Metallic%20SEC%20Logo.png',
+            'assets/graphic-design/Food/Bay-Juices-New-Year.jpg',
+            'assets/graphic-design/Corporate/General-Ad.jpg',
+            'assets/graphic-design/Illustrations/Collette2orange-01.jpg',
+          ]
+        },
+      ];
+
+      const CONFIG = {
+        cardWidth: 220,
+        cardHeight: 270,
+        animationDuration: 0.75,
+        animationOverlap: 0.5,
+        headingFadeDuration: 0.45,
+      };
+
+      const scatterEl = document.getElementById('gdScatter');
+      const headingEl = document.getElementById('gdScatterHeading');
+
+      let viewport = getViewport();
+      let state = { activeCards: [], currentSection: 0, isAnimating: false };
+
+      function getViewport() {
+        return {
+          centerX: window.innerWidth / 2,
+          centerY: window.innerHeight / 2,
+          rangeMin: Math.min(window.innerWidth, window.innerHeight) * 0.3,
+          rangeMax: Math.min(window.innerWidth, window.innerHeight) * 0.65,
+        };
+      }
+
+      function getEdgePosition(cx, cy) {
+        const d = { left: cx, right: window.innerWidth - cx, top: cy, bottom: window.innerHeight - cy };
+        const min = Math.min(d.left, d.right, d.top, d.bottom);
+        const vary = () => (Math.random() - 0.5) * 400;
+        if (min === d.left)   return { x: -320 - Math.random() * 200, y: cy - CONFIG.cardHeight / 2 + vary() };
+        if (min === d.right)  return { x: window.innerWidth + 60 + Math.random() * 200, y: cy - CONFIG.cardHeight / 2 + vary() };
+        if (min === d.top)    return { x: cx - CONFIG.cardWidth / 2 + vary(), y: -420 - Math.random() * 200 };
+        return { x: cx - CONFIG.cardWidth / 2 + vary(), y: window.innerHeight + 60 + Math.random() * 200 };
+      }
+
+      function createCards(setIndex) {
+        const imgs = IMAGE_SETS[setIndex].images;
+        return imgs.map(src => {
+          const card = document.createElement('div');
+          card.className = 'gd-card';
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = '';
+          img.draggable = false;
+          card.appendChild(img);
+
+          const angle = Math.random() * Math.PI * 2;
+          const radius = viewport.rangeMin + Math.random() * (viewport.rangeMax - viewport.rangeMin);
+          const cx = viewport.centerX + Math.cos(angle) * radius;
+          const cy = viewport.centerY + Math.sin(angle) * radius;
+
+          gsap.set(card, {
+            left: cx - CONFIG.cardWidth / 2,
+            top:  cy - CONFIG.cardHeight / 2,
+            rotation: Math.random() * 50 - 25,
+          });
+
+          scatterEl.appendChild(card);
+          return { element: card, cx, cy };
+        });
+      }
+
+      function animateHeading(text) {
+        return gsap.timeline()
+          .to(headingEl, { opacity: 0, duration: CONFIG.headingFadeDuration, ease: 'power2.inOut' })
+          .call(() => { headingEl.textContent = text; })
+          .to(headingEl, { opacity: 1, duration: CONFIG.headingFadeDuration, ease: 'power2.inOut' });
+      }
+
+      function animateCards(exiting, entering) {
+        const tl = gsap.timeline();
+        exiting.forEach(({ element, cx, cy }) => {
+          const edge = getEdgePosition(cx, cy);
+          tl.to(element, {
+            left: edge.x, top: edge.y,
+            rotation: Math.random() * 180 - 90,
+            duration: CONFIG.animationDuration,
+            ease: 'power2.in',
+            onComplete: () => element.remove(),
+          }, 0);
+        });
+        entering.forEach(({ element, cx, cy }) => {
+          const edge = getEdgePosition(cx, cy);
+          gsap.set(element, { left: edge.x, top: edge.y, rotation: Math.random() * 180 - 90 });
+          tl.to(element, {
+            left: cx - CONFIG.cardWidth / 2,
+            top:  cy - CONFIG.cardHeight / 2,
+            rotation: Math.random() * 50 - 25,
+            duration: CONFIG.animationDuration,
+            ease: 'power2.out',
+          }, CONFIG.animationOverlap);
+        });
+        return tl;
+      }
+
+      function getSectionIndex(progress) {
+        if (progress < 0.25) return 0;
+        if (progress < 0.5)  return 1;
+        if (progress < 0.75) return 2;
+        return 3;
+      }
+
+      headingEl.textContent = IMAGE_SETS[0].heading;
+      gsap.set(headingEl, { opacity: 1 });
+      state.activeCards = createCards(0);
+
+      ScrollTrigger.create({
+        trigger: '#gdScatter',
+        start: 'top top',
+        end: () => '+=' + (window.innerHeight * 5),
+        pin: true,
+        pinSpacing: true,
+        onUpdate: ({ progress }) => {
+          if (state.isAnimating) return;
+          const target = getSectionIndex(progress);
+          if (target === state.currentSection) return;
+
+          state.isAnimating = true;
+          const newCards = createCards(target);
+          Promise.all([
+            animateCards(state.activeCards, newCards).then(),
+            animateHeading(IMAGE_SETS[target].heading).then(),
+          ]).then(() => {
+            state.activeCards = newCards;
+            state.currentSection = target;
+            state.isAnimating = false;
+          });
+        },
+      });
+
+      window.addEventListener('resize', () => {
+        viewport = getViewport();
+        state.activeCards.forEach(({ element }) => element.remove());
+        state.activeCards = createCards(state.currentSection);
+        ScrollTrigger.refresh();
+      });
+    })();
   </script>
   <script src="js/theme.js"></script>
   <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
