@@ -582,9 +582,10 @@
 
     .work-exp-section {
       background: #2d2d2d;
-      padding: 4rem 2rem;
+      padding: 4rem 0;
     }
     .work-exp-section h2 {
+      padding: 0 2rem;
       text-align: center;
       color: #fff;
       font-size: clamp(1.5rem, 4vw, 2.5rem);
@@ -696,7 +697,7 @@
     <div class="site-logo"><a href="index.html"><img src="assets/logo/SECLogo.png" alt="Shaquille Comrie" decoding="async" fetchpriority="high"></a></div>
     <nav class="nav-links">
       <a href="graphic-design.html">Graphic Design</a>
-      <a href="video-production.html">Video Production</a>
+      <a href="motion-design.html">Motion Design</a>
       <a href="ui-ux.html">UI/UX</a>
       <a href="ai-enthusiast.html">AI Enthusiast</a>
       <a href="contact.html">Contact</a>
@@ -742,9 +743,9 @@
           <p>8 years of graphic design experience focusing on typography, color theory and illustration.</p>
           <span class="skill-card-btn">Explore →</span>
         </a>
-        <a href="video-production.html" class="skill-card skill-card-video">
+        <a href="motion-design.html" class="skill-card skill-card-video">
           <span class="skill-card-num">02</span>
-          <h3>Video Production</h3>
+          <h3>Motion Design</h3>
           <p>Over 9 years of videography experience, skilled in shooting, editing and motion graphics using the Adobe Creative Suite.</p>
           <span class="skill-card-btn">Explore →</span>
         </a>
@@ -926,11 +927,11 @@
             var curOrigin = location.origin || (location.protocol + '//' + location.host);
             var sameOrigin = (refUrl.origin === curOrigin) ||
               (location.protocol === 'file:' && ref.indexOf('file:') === 0);
-            var internalPage = /(graphic-design|video-production|ui-ux|contact|work-[\w-]+\.html)/.test(refUrl.pathname) ||
-              /(graphic-design|video-production|ui-ux|contact)\/?$/.test(refUrl.pathname);
+            var internalPage = /(graphic-design|motion-design|ui-ux|contact|work-[\w-]+\.html)/.test(refUrl.pathname) ||
+              /(graphic-design|motion-design|ui-ux|contact)\/?$/.test(refUrl.pathname);
             if (sameOrigin && internalPage) skipOverlay = true;
           } catch (e) {
-            if (ref.indexOf(location.host) !== -1 && /(graphic-design|video-production|ui-ux|contact|work-)/.test(ref)) {
+            if (ref.indexOf(location.host) !== -1 && /(graphic-design|motion-design|ui-ux|contact|work-)/.test(ref)) {
               skipOverlay = true;
             }
           }

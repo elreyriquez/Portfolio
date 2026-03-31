@@ -1,6 +1,6 @@
 # Video Hosting Guide
 
-Your video production page is set up to embed videos. Here are the best hosting options for a static portfolio (no backend, free/cheap):
+Your motion design page is set up to embed videos. Here are the best hosting options for a static portfolio (no backend, free/cheap):
 
 ## Recommended: YouTube (Unlisted)
 
@@ -10,7 +10,7 @@ Your video production page is set up to embed videos. Here are the best hosting 
 1. Upload your videos to [YouTube](https://youtube.com)
 2. Set visibility to **Unlisted** (only people with the link can find it)
 3. Copy the video ID from the URL: `youtube.com/watch?v=**dQw4w9WgXcQ**`
-4. In `video-production.html`, replace `VIDEO_ID` with your ID in each iframe `src`
+4. In `motion-design.html`, replace `VIDEO_ID` with your ID in each iframe `src`
 
 ```html
 <!-- Change this -->
@@ -64,4 +64,4 @@ Thumbnails open the video in a new tab. For vertical videos (Shorts, Reels), You
 
 ## HD Videos Carousel
 
-The HD Videos section is an inline horizontal carousel. To add videos, copy a `vp-hd-slide` block in `video-production.html` and replace `VIDEO_ID` in the href and img src with your YouTube video ID.
+The HD Videos section is an inline horizontal carousel. To add videos, copy a `vp-hd-slide` block in `motion-design.html` and replace `VIDEO_ID` in the href and img src with your YouTube video ID.
