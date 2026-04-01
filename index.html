@@ -366,6 +366,33 @@
       .clutter-header { max-width: min(20rem, 90vw); }
       .clutter-header .intro { font-size: clamp(0.98rem, 3.6vw, 1.25rem); }
     }
+    /* Mobile: hide clutter items and mode buttons, show copy only */
+    @media (max-width: 768px) {
+      .clutter-item,
+      .clutter-modes { display: none !important; }
+
+      .intro-section {
+        justify-content: center;
+        align-items: center;
+      }
+      .clutter-header {
+        position: relative !important;
+        transform: none !important;
+        left: auto !important;
+        top: auto !important;
+        width: 90vw !important;
+        max-width: 28rem !important;
+        margin: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      .clutter-header::before { display: none !important; }
+      .clutter-header .intro {
+        font-size: clamp(1.1rem, 4.5vw, 1.35rem) !important;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.7) !important;
+        color: rgba(255,255,255,0.95) !important;
+      }
+    }
     @keyframes intro-slide-in {
       from {
         opacity: 0;
@@ -1183,14 +1210,22 @@
 
       /* ── Entrance animation: items slide in from nearest edge after 1.5s ── */
       (function () {
-        var deskW = desk.offsetWidth;
-        var mid   = deskW / 2;
+        var deskW  = desk.offsetWidth;
+        var mobile = deskW <= 768;
 
+        if (mobile) {
+          /* Mobile: just fade the copy in, no clutter items to animate */
+          gsap.set(header, { opacity: 0 });
+          gsap.to(header, { opacity: 1, duration: 1.2, ease: 'power2.out', delay: 1.0 });
+          return;
+        }
+
+        var mid = deskW / 2;
         gsap.set(header, { opacity: 0 });
 
         items.forEach(function (item) {
-          var x        = gsap.getProperty(item, 'x');
-          var fromLeft = x < mid;
+          var x         = gsap.getProperty(item, 'x');
+          var fromLeft  = x < mid;
           var offscreen = fromLeft ? -(deskW * 0.7) : (deskW * 0.7);
 
           gsap.set(item, { x: x + offscreen, opacity: 0 });
