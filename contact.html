@@ -95,9 +95,16 @@
       transition: color 0.2s;
     }
     .contact-details a:hover { color: var(--accent); }
-    .contact-send {
-      display: inline-block;
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      align-items: center;
       margin-top: 2rem;
+    }
+    .contact-action {
+      display: inline-block;
       padding: 0.6rem 1.5rem;
       border: 1px solid var(--border-hover);
       background: transparent;
@@ -108,7 +115,7 @@
       transition: border-color 0.2s, color 0.2s;
       cursor: pointer;
     }
-    .contact-send:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-action:hover { border-color: var(--accent); color: var(--accent); }
   </style>
 </head>
 <body>
@@ -135,12 +142,15 @@
   </header>
   <main class="contact-page">
     <img src="assets/contact-portrait.png" alt="Shaquille Comrie" class="contact-portrait">
-    <p class="contact-headline">Interested in doing business? Feel free to shoot me a message below.</p>
+    <p class="contact-headline">Interested in doing business? Feel free to shoot me a message or get a quote below.</p>
     <div class="contact-details">
       <a href="mailto:shaqcomrie@gmail.com">Email: shaqcomrie@gmail.com</a>
       <a href="tel:+18763236148">Tel: 1-876-323-6148</a>
     </div>
-    <a href="mailto:shaqcomrie@gmail.com" class="contact-send">Send</a>
+    <div class="contact-actions">
+      <a href="mailto:shaqcomrie@gmail.com" class="contact-action">Email</a>
+      <a href="https://elreyriquez.github.io/sec-services/" class="contact-action">Get a quote</a>
+    </div>
   </main>
   <script src="js/theme.js"></script>
   <script>try { sessionStorage.setItem('portfolioInternal', '1'); } catch (e) {}</script>
