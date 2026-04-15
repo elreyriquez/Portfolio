@@ -47,6 +47,23 @@
         });
       });
     }
+
+    /* SEC quotation site: force new tab (some mobile / overlay cases ignore target="_blank" alone). */
+    document.querySelectorAll('a[data-sec-quote-tab][href]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (e.defaultPrevented) return;
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var url = a.getAttribute('href');
+        if (!url) return;
+        var w = window.open(url, '_blank', 'noopener,noreferrer');
+        if (w) {
+          e.preventDefault();
+          try {
+            w.opener = null;
+          } catch (err) {}
+        }
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
