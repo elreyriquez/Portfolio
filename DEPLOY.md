@@ -14,7 +14,7 @@ GitHub will show you commands. Use these (replace `YOUR_USERNAME` with your GitH
 
 ```bash
 cd /Users/shaq/Documents/Projects/portfolio-website
-git remote add origin https://github.com/YOUR_USERNAME/portfolio.git
+git remote add origin https://github.com/elreyriquez/portfolio.git
 git branch -M main
 git push -u origin main
 ```
@@ -28,7 +28,7 @@ git push -u origin main
 
 Your site will be live at:
 
-- `https://elreyriquez.github.io/Portfolio/` (project site until a custom domain is set)
+- `https://elreyriquez.github.io/portfolio/` (project site until a custom domain is set)
 
 It may take 1–2 minutes to deploy.
 
