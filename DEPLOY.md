@@ -27,7 +27,23 @@ git push -u origin main
 4. Click **Save**
 
 Your site will be live at:
-- `https://YOUR_USERNAME.github.io/portfolio/` (if repo is named "portfolio")
-- `https://YOUR_USERNAME.github.io/` (if repo is named "YOUR_USERNAME.github.io")
+
+- `https://elreyriquez.github.io/Portfolio/` (project site until a custom domain is set)
 
 It may take 1–2 minutes to deploy.
+
+## 4. Custom domain (`www` canonical)
+
+This repo includes a **`CNAME`** file at the root with **`www.secfreelance.com`**. That matches GitHub Pages’ expected hostname for a **`www`-first** setup.
+
+1. **Settings** → **Pages** → **Custom domain:** enter **`www.secfreelance.com`** → Save.  
+   - GitHub should detect the `CNAME` file; if the UI asks to commit a `CNAME`, it should match the file in this repo.
+
+2. After DNS propagates, enable **Enforce HTTPS** on the same Pages screen.
+
+**DNS (summary — Namecheap or similar):**
+
+- **`www`** → **CNAME** → **`elreyriquez.github.io`**
+- **`@`** → **URL redirect** → **`https://www.secfreelance.com`** (no GitHub **A** records on `@` if you only use this redirect + `www`)
+
+Do **not** keep both a **URL redirect on `@`** and **four GitHub A records on `@`** at the same time.
