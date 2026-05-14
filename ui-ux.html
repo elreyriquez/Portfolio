@@ -62,6 +62,131 @@
       overflow-x: clip;
     }
 
+    /* ── Latest work: Krowned Hands (self-contained palette, works in light + dark theme) ── */
+    .latest-work-kh {
+      --kh-cream: #f3ece2;
+      --kh-cream-deep: #e8dfd2;
+      --kh-chocolate: #2a1810;
+      --kh-chocolate-muted: #5c4336;
+      --kh-gold: #b8893d;
+      max-width: 72rem;
+      margin: 0 auto 4rem;
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+      border-radius: 18px;
+      background:
+        linear-gradient(165deg, rgba(255,255,255,0.5) 0%, transparent 42%),
+        linear-gradient(180deg, var(--kh-cream) 0%, var(--kh-cream-deep) 100%);
+      border: 1px solid rgba(42, 24, 16, 0.1);
+      box-shadow: 0 8px 32px rgba(42, 24, 16, 0.08);
+    }
+    .latest-work-kh__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: clamp(1.5rem, 3vw, 2.75rem);
+      align-items: center;
+    }
+    @media (max-width: 820px) {
+      .latest-work-kh__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .latest-work-kh__mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      margin-bottom: 1rem;
+    }
+    .latest-work-kh__eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--kh-chocolate-muted);
+      margin: 0 0 0.5rem;
+    }
+    .latest-work-kh__title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--kh-chocolate);
+      margin: 0 0 0.35rem;
+    }
+    .latest-work-kh__title em {
+      font-style: italic;
+      color: var(--kh-gold);
+    }
+    .latest-work-kh__tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--kh-chocolate-muted);
+      margin: 0 0 1rem;
+      padding: 0.35rem 0.65rem;
+      display: inline-block;
+      border: 1px solid rgba(42, 24, 16, 0.2);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.35);
+    }
+    .latest-work-kh__lead {
+      margin: 0 0 1.35rem;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--kh-chocolate-muted);
+      max-width: 34rem;
+    }
+    .latest-work-kh__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .latest-work-kh__cta {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      background: var(--kh-chocolate);
+      color: #faf6f0;
+      border: 1px solid var(--kh-chocolate);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .latest-work-kh__cta:hover {
+      background: #3d261c;
+      transform: translateY(-1px);
+    }
+    .latest-work-kh__visual {
+      margin: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(42, 24, 16, 0.12);
+      box-shadow: 0 12px 40px rgba(42, 24, 16, 0.12);
+      line-height: 0;
+    }
+    .latest-work-kh__visual a {
+      display: block;
+      line-height: 0;
+    }
+    .latest-work-kh__visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      vertical-align: top;
+    }
+    .latest-work-kh__caption {
+      margin: 0.5rem 0 0;
+      font-size: 0.78rem;
+      color: var(--kh-chocolate-muted);
+      letter-spacing: 0.02em;
+    }
+
     /* ── Nav ── */
     .site-header { padding: 1.125rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
     .site-logo { flex: 1; flex-shrink: 0; }
@@ -206,6 +331,7 @@
     @media (max-width: 600px) {
       .case-studies-section { padding: 3.5rem 1rem 1.5rem; }
       .case-study-card { max-width: 100%; }
+      .latest-work-kh { margin-bottom: 2.5rem; padding: 1.35rem; border-radius: 14px; }
     }
 
     /* ── Detail panel (below cards, toggled) ── */
@@ -990,6 +1116,27 @@
         <p class="product-thinking-lead">I design systems that facilitate structure, scalability, and clarity in complex digital products.</p>
         <p class="product-thinking-copy">This process involves mind mapping flows and relationships: user-centered modules and testing that help shape the UI and overall user experience. This guides visual design and instructs brand cohesion, ensuring a seamless user journey.</p>
       </div>
+
+      <article class="latest-work-kh scroll-reveal" aria-labelledby="latest-work-kh-heading">
+        <div class="latest-work-kh__grid">
+          <div class="latest-work-kh__copy">
+            <img class="latest-work-kh__mark" src="assets/ui-ux/krowned-hands-mark.png" width="112" height="112" alt="Krowned Hands mark" loading="lazy">
+            <p class="latest-work-kh__eyebrow">Latest work</p>
+            <h2 id="latest-work-kh-heading" class="latest-work-kh__title">Krowned Hands — <em>calm, editorial web</em></h2>
+            <p class="latest-work-kh__tag">Mobile massage · Kingston &amp; Montego Bay</p>
+            <p class="latest-work-kh__lead">A warm, premium one-page experience for Jordan’s mobile massage practice: clear session framing, trust-led typography, and a soft cream palette that mirrors the in-room brand.</p>
+            <div class="latest-work-kh__actions">
+              <a class="latest-work-kh__cta" href="https://www.krownedhands.com/" target="_blank" rel="noopener noreferrer">Visit live site</a>
+            </div>
+          </div>
+          <figure class="latest-work-kh__visual">
+            <a href="https://www.krownedhands.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Krowned Hands website (hero preview)">
+              <img src="assets/ui-ux/krowned-hands-hero.png" width="1200" height="900" alt="Krowned Hands website hero: headline, navigation, and session photography." loading="lazy">
+            </a>
+            <figcaption class="latest-work-kh__caption">Hero layout, type, and color system as shipped on the live site.</figcaption>
+          </figure>
+        </div>
+      </article>
 
       <h2 class="case-studies-title">Case Studies</h2>
 
